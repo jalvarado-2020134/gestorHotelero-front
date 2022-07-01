@@ -8,11 +8,15 @@
       <div class="navbar-nav">
         <a class="nav-link active" routerLink="/home" aria-current="page"  *ngIf="" >Home</a> 
         <a class="nav-link active" routerLink="/profile" aria-current="page"  *ngIf="" >Mi Perfil</a>
+        <a class="nav-link active" routerLink="/users" aria-current="page" *ngIf="token">Users</a>
+
         <a *ngIf="!token" class="nav-link" routerLink="/login">Login</a>
         <a *ngIf="!token"class="nav-link" routerLink="/register">Register</a>
       </div>
+      <div class="text-center">
       <div class="navbar-nav" *ngIf="token" >  
         <a class="nav-link" (click)="logOut();" type="button" routerLink="/login">Log Out</a>
+      </div>
       </div>
     </div>
   </div>

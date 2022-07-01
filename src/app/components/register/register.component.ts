@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { UserModel } from "src/app/models/user.model";
-import { UserRestService } from "src/app/services/user-rest.service";
+import { UserRestService } from "src/app/services/userRest/user-rest.service";
 
 @Component({
     selector: 'app-register',
