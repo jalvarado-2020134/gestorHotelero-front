@@ -1,0 +1,18 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+.btn btn-primary btn-lg btn-block{
+    text-align: center;
+    left: 30%;
+    padding-left: 20cm;
+    width: 30%;
+}
+
+input[type-submit] :hover{
+    background-color: aqua;
+}

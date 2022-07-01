@@ -7,14 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" routerLink="/home" aria-current="page"  *ngIf="" >Home</a> 
-        <a class="nav-link active" routerLink="/company" aria-current="page"  *ngIf="" >Empresa</a>
-        <a class="nav-link active" routerLink="/office" aria-current="page"  *ngIf="" >Sucursales</a>
-        <a class="nav-link active" routerLink="/products" aria-current="page"  *ngIf="" >Productos</a>
         <a class="nav-link active" routerLink="/profile" aria-current="page"  *ngIf="" >Mi Perfil</a>
-        <a class="nav-link" routerLink="">Login</a>
-        <a class="nav-link" routerLink="/register">Register</a>
+        <a *ngIf="!token" class="nav-link" routerLink="/login">Login</a>
+        <a *ngIf="!token"class="nav-link" routerLink="/register">Register</a>
       </div>
-      <div class="navbar-nav" >  
+      <div class="navbar-nav" *ngIf="token" >  
+        <a class="nav-link" (click)="logOut();" type="button" routerLink="/login">Log Out</a>
       </div>
     </div>
   </div>

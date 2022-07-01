@@ -1,12 +1,24 @@
-.carousel-inner{
-    height: 550px;
-}
 
-.carousel-item{
+
+
+.carousel-inner{
+    
     height: 50%;
 }
 
-.text{
-    font-size: 75px;
-    
+.carousel-item{
+    height: 600px;
 }
+
+
+
+.text{
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    color: black;
+    background-color: antiquewhite;
+}
+

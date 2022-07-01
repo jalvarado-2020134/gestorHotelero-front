@@ -1,0 +1,33 @@
+
+.bg-content {
+    background: rgb(208, 218, 224);
+    background: linear-gradient(171deg, rgba(208, 218, 224, 1) 0%, rgba(226, 235, 240, 1) 100%);
+}
+
+.requiredData {
+    color: indianred;
+}
+
+#photo{
+    width: 100%;
+}
+
+.col-md-7 col-lg-5 col-xl-5 offset-xl-1{
+    width: auto;
+    margin-left: 0%;
+}
+
+h6{
+    margin-left: 0%;
+    font-size: 15px;
+    align-items: left;
+}
+
+.col-md-3 ps-5{
+    margin-left: 0%;
+}
+
+.col-md-4{
+    align-items: right;
+    float: right;
+}
