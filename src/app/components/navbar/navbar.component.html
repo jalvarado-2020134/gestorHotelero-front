@@ -9,6 +9,8 @@
         <a class="nav-link active" routerLink="/home" aria-current="page"  *ngIf="" >Home</a> 
         <a class="nav-link active" routerLink="/profile" aria-current="page"  *ngIf="" >Mi Perfil</a>
         <a class="nav-link active" routerLink="/users" aria-current="page" *ngIf="token">Users</a>
+        <a class="nav-link active" routerLink="/hotels" aria-current="page" *ngIf="token">Hotels</a>
+
 
         <a *ngIf="!token" class="nav-link" routerLink="/login">Login</a>
         <a *ngIf="!token"class="nav-link" routerLink="/register">Register</a>

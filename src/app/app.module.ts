@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {UserComponent} from './components/Users/user.component';
+import { HotelComponent } from './components/hotels/hotel.component';
+import {SearchPipe} from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,9 @@ import {UserComponent} from './components/Users/user.component';
     LoginComponent,
     RegisterComponent,
     UserComponent,
+    HotelComponent,
+    SearchPipe,
+    
     
   ],
   imports: [

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div>
 <div class="input-group m-4">
-    <input type="text" class="form-control" placeholder="Search User by Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <input [(ngModel)]="search" type="text" class="form-control" placeholder="Search User by Name" aria-label="Recipient's username" aria-describedby="button-addon2">
     <div class="input-group-append">
       <button class="btn btn-outline-success me-5" type="button" id="button-addon2">Button</button>
     </div>
@@ -19,7 +19,7 @@
 <hr>
 <div style="background-color: #DEF0F1;">
 <div class="row justify-content-center px-4" *ngIf="users">
-    <div *ngFor="let user of users" class="card m-4" style="width: 18rem;">
+    <div *ngFor="let user of users | search:search" class="card m-4" style="width: 18rem;">
         <div class="">
         <div class="card-body ">
             <h5 class="card-title text-center">{{user.name}}</h5><br>
@@ -38,7 +38,7 @@
         </div>
 
         </div>
-
+    </div>
     </div>
 
 </div>
@@ -47,10 +47,12 @@
 <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i>New User</h5>
+        <div class="text-center">
+        <div class="modal-header text-center" style="background-color: #1EE9EC;" >
+            <h5 class="modal-title"  id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i>New User</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+    </div>
         <div class="modal-body">
             <form #newUserForm="ngForm">
                 <div class="mb-3">
@@ -97,8 +99,8 @@
 <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true">Update User</i></h5>
+            <div class="modal-header text-center" style="background-color: #1EE9EC;">
+                <h5 class="modal-title" style="background-color: #1EE9EC;" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true">Update User</i></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>

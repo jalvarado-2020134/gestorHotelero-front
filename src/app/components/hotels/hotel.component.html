@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+<div class="text-left">
+    <div class="input-group m-5">
+        <input [(ngModel)]="search" type="text" class="form-control" placeholder="Find Hotel by Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <img src="data:image/png;base64,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" 
+    class="rounded float-end" alt="30%">
+    </div>
+</div>
+
+<div>
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newHotel">
+        <span class="icon">
+        </span>
+        <span class="text">New Hotel</span>
+</button>
+</div>
+
+<div class="wrapper" *ngIf="hotels">
+    <div  class="card text-dark mb-3" style="background-color: #AED6F1;" *ngFor="let hotel of hotels | search:search">
+        <div class="card-header text-center" style=" border-radius: 6%; background-color: #1281cc;">{{hotel.name}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Address:  {{hotel.address}}</h5>
+          <h5 class="card-title">Phone:  {{hotel.phone}}</h5>
+          <h5 class="card-title">Times Request:  {{hotel.timesRequest}}</h5>
+          <p class="card-subtutle">Manager: {{hotel.manager}}</p>
+          <button class="btn btn-warning m-2" data-bs-toggle="offcanvas" 
+          data-bs-target="#offcanvasExample" 
+          aria-controls="offcanvasExample">
+            Update
+        </button>
+        <button class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="newHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i> 
+                    &nbsp; New Hotel
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="newHotel(newHotelForm)" #newHotelForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="hotel.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input [(ngModel)]="hotel.address" name="address" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input [(ngModel)]="hotel.phone" name="phone" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Manager</label>
+                        <select [(ngModel)]="hotel.manager" name="role" class="form-select" aria-label="Defaul select example">
+                            <option disabled value="" selected>Choose a Manager</option>
+                            <option *ngFor="let user of users" value="{{user._id}}">
+                                {{user.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Discard
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floopy-o" aria-hidden="true">Save Changes</i>
+
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
