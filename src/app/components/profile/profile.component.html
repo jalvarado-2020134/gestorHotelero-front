@@ -1,0 +1,135 @@
+<app-navbar></app-navbar>
+<div class="container-fluid user-profile">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="well well-sm">
+          <div class="user-profile-card">
+            <div class="user-profile-header">
+            </div>
+            <div class="user-profile-avatar text-center">
+              <img class="image"  *ngIf="UserRest.getIdentity().image" [src]="this.url + 'company/getImage/' + UserRest.getIdentity().image"/>
+              <!-- <img class="image"  *ngIf="_usuarioService.obtenerIdentidad().imagen === null" src="/assets/img/usuarios/User.png"/> -->
+            </div>
+            <div class="row">
+              <div class="text-center">
+                <h4>Perfil</h4>
+                <br />
+              </div>
+              <div class="panel-footer"></div>
+              <div class="container text-center">
+                <p>
+                  <small>Nombre</small>
+                   {{UserRest.getIdentity().name}} 
+                </p>
+                <p>
+                  <small>Tipo Empresa</small>
+                  {{UserRest.getIdentity().typeOfCompany}}
+                </p>
+                <p>
+                  <small>Email</small>
+                  {{UserRest.getIdentity().email}}
+                </p>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Seleccionar Foto De Perfil</button>
+              <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
+              data-bs-target="#EliminarUser">Eliminar Perfil</button>
+              <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
+              data-bs-target="#EditarUser">Editar Perfil</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--MODAL EDITAR USUARIO-->
+<div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar mi perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Nombres</label>
+            <input type="text" class="form-control"
+            name="email" #name="ngModel" [(ngModel)]="ProfileModel.name">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">typeOfCompany</label>
+            <input type="text" class="form-control" >
+          </div>
+          <!-- <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Usuario</label>
+            <input type="text" class="form-control"
+            name="usuario" #usuario="ngModel" [(ngModel)]="ProfileModel.usuario">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Edad</label>
+            <input type="number" class="form-control"
+            name="edad" #edad="ngModel" [(ngModel)]="ProfileModel.edad">
+          </div> -->
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Correo</label>
+            <input type="email" class="form-control">
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" (click)="updateHotel()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--MODAL ELIMINAR USUARIO-->
+<div class="modal fade" id="EliminarUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">ELIMINAR PERFIL</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Are you sure you want to delete the profile?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+         (click)="deleteHotel(UserRest.getIdentity()._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="image" class="form-label">Select image: </label>
+          <input (change)="filesChange($event)" type="file" class="form-control" id="image">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button (click)="uploadImage()" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

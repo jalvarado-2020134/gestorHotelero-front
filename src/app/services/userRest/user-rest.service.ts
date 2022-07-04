@@ -7,7 +7,9 @@ import { environment } from "src/environments/environment";
 })
 
 export class UserRestService{
-    httpOptions = new HttpHeaders().set('Content-Type', 'application/json');
+    httpOptions = new HttpHeaders({
+        'Content-Type': 'application/json', 'Authorization': this.getToken()
+    });
 
     constructor(
         private http: HttpClient
@@ -48,5 +50,13 @@ export class UserRestService{
 
     register(params:{}){
         return this.http.post(environment.baseUrl + 'user/register', params, {headers: this.httpOptions});
+    }
+
+    updateHotel(id:string,params:{}){
+        return this.http.put(environment.baseUrl + 'user/update/' + id,params,{headers:this.httpOptions});
+    }
+    
+    deleteHotel(id:string){
+      return this.http.delete(environment.baseUrl + 'user/delete/' + id,{headers: this.httpOptions});
     }
 }

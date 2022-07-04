@@ -11,6 +11,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {UserComponent} from './components/Users/user.component';
 import { HotelComponent } from './components/hotels/hotel.component';
 import {SearchPipe} from './pipes/search.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {SearchPipe} from './pipes/search.pipe';
     UserComponent,
     HotelComponent,
     SearchPipe,
+    ProfileComponent,
     
     
   ],
