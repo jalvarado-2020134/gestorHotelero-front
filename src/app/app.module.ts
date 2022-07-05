@@ -12,6 +12,7 @@ import {UserComponent} from './components/Users/user.component';
 import { HotelComponent } from './components/hotels/hotel.component';
 import {SearchPipe} from './pipes/search.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import {EventComponent} from './components/events/event.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     HotelComponent,
     SearchPipe,
     ProfileComponent,
+    EventComponent
     
     
   ],

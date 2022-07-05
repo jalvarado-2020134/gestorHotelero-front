@@ -16,6 +16,17 @@
 </button>
 </div>
 
+<div *ngIf="token && identity.role === 'MANAGER'" class="ms-3 text-center">
+<button routerLink="/services" class="btn btn-warning m-2 text-center" data-bs-toggle="modal" class="btn btn-warning m-2 text-center">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+      Services
+  </button>
+  <button routerLink="/events" class="btn btn-success"> <i class="fa fa-trash" aria-hidden="true"></i> Events</button>
+  <button routerLink="/rooms" class="btn btn-primary m-2 text-center" data-bs-toggle="modal" class="btn btn-primary m-2 text-center">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+      Rooms
+  </button>
+</div>
 <div class="wrapper" *ngIf="hotels">
     <div  class="card text-dark mb-3" style="background-color: #AED6F1;" *ngFor="let hotel of hotels | search:search">
         <div class="card-header text-center" style=" border-radius: 6%; background-color: #1281cc;">{{hotel.name}}</div>
@@ -30,11 +41,6 @@
             Update
         </button>
         <button (click)="deleteHotel(hotel._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-        </div>
-        <div *ngIf="token && identity.role === 'MANAGER'" class="text-center ms-3">
-            <button routerLink="/services" class="btn btn-warning btn-icon-split text-left" >Services</button><br><br>
-            <button routerLink="/events" class="btn btn-primary btn-icon-split">Events</button><br><br>
-            <button routerLink="/rooms" class="btn btn-success btn-icon-split">Rooms</button>
         </div>
       </div>
 </div>

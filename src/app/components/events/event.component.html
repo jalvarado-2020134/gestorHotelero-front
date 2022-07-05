@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newEvent">
+        <span class="icon">
+        </span>
+        <span class="text">New Event</span>
+    </button>
+</div>
+<hr>
+
+<div class="container">
+    <div class="products-container">
+        <div *ngFor="let event of events" class="products" data-name="p-1">
+            <h4 class="card-title">{{event.name}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Description:  {{event.description}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Date:  {{event.date}}</h6>
+            <p class="card-text">Hotel:  {{event.hotel.name}}</p>
+            <button (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i>Update</button>
+            <button (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true">Delete</i></button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #1EE9EC;">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-building" aria-hidden="true"></i>
+                &nbsp; New Event </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="newEvent(newEventForm)" #newEventForm="ngForm" >
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input [(ngModel)]="event.name" name="name" class="form-control" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input [(ngModel)]="event.description" name="name" class="form-control" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input [(ngModel)]="event.date" name="name" class="form-control" type="date">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hotel</label>
+                            <select [(ngModel)]="event.hotel" name="hotel" class="form-select" aria-label="Default select example">
+                                <option disabled value="" selected>Choose A Hotel</option>
+                                <option *ngFor="let hotel of hotels" value="{{hotel._id}}">{{hotel.name}}</option>
+                            </select>
+                        </div>
+                        <div class=" modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard</button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                    aria-hidden="true"></i> Save Event
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateEvent" tabindex="-1" aria-labelledby="updateEvent" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #1EE9EC;">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true">Update Event</i></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="updateEvent()" *ngIf="eventUpdate" >
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input [(ngModel)]="eventUpdate.name" name="name" class="form-control" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input [(ngModel)]="eventUpdate.description" name="description" class="form-control" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data</label>
+                            <input [(ngModel)]="eventUpdate.date" name="date" class="form-control" type="date">
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Discard
+                            </button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floopy-o" aria-hidden="true">Save Changes</i>
+    
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
