@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
   token: any;
   role: any;
+  identity: any;
+
 
   constructor(
     private userRest: UserRestService, private router: Router
@@ -18,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.userRest.getToken();
+    this.identity = this.userRest.getIdentity();
     this.role = this.userRest.getIdentity().role;
   }
 

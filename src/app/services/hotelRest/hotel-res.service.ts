@@ -36,6 +36,6 @@ export class HotelRestService{
     }
 
     deleteHotel(id:string){
-        return this.http.delete(environment.baseUrl + 'hotel/deleteHotel' + id,{headers: this.httpOptions});
+        return this.http.delete(environment.baseUrl + 'hotel/deleteHotel/' + id,{headers: this.httpOptions});
     }
 }

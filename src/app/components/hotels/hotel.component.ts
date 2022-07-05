@@ -19,11 +19,13 @@ export class HotelComponent implements OnInit{
     hotel: HotelModel;
     search: string = '';
     users: any;
+    hotelUpdate: any;
 
 
     constructor(
         private userRest: UserAdminRestService,
         private hotelRest: HotelRestService,
+        private usersRest: UserRestService
     ){
 
     this.hotel = new HotelModel('','','','',0,'');
@@ -33,15 +35,17 @@ export class HotelComponent implements OnInit{
     ngOnInit(): void {
         this.getHotels();
         this.getUsers();
+        this.token = this.usersRest.getToken();
+        this.identity = this.usersRest.getIdentity();
+        this.role = this.usersRest.getIdentity().role;
         
     }
 
     getHotels(){
-        this.hotels = [];
         this.hotelRest.getHotels().subscribe({
             next:(res:any)=>{
                 this.hotels = res.hotels,
-                console.log(res);
+                console.log(res.hotels);
             },
             error: (err)=> console.log(err)
         })
@@ -50,8 +54,7 @@ export class HotelComponent implements OnInit{
     getUsers(){
         this.userRest.getUsers().subscribe({
             next:(res:any)=>{
-                this.users = res.user,
-                console.log(this.users);
+                this.users = res.user
             },
             error: (err)=> console.log(err)
         })
@@ -77,5 +80,55 @@ export class HotelComponent implements OnInit{
                 newHotelForm.reset();
             }
         })
+
     }
+
+    getHotel(id:string){
+        this.hotelRest.getHotel(id).subscribe({
+            next: (res: any)=>{
+                this.hotelUpdate = res.hotel;
+            },
+            error: (err) =>{alert(err.error.message)}
+        })
+    }
+
+    updateHotel(){
+        this.hotelRest.updateHotel(this.hotelUpdate._id, this.hotelUpdate).subscribe({
+            next: (res:any)=>{
+                Swal.fire({
+                    icon: 'success',
+                    title: res.message,
+                    confirmButtonColor: '#E74C3C'
+
+                });
+                this.getHotels();
+            },
+            error: (err)=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: err.error.message || err.error,
+
+                });
+            },
+        })
+    }
+
+    deleteHotel(id:string){
+        this.hotelRest.deleteHotel(id).subscribe({
+            next: (res:any)=>{
+                Swal.fire({
+                    icon: 'success',
+                    title: res.message + ' : ' + res.deleteHotel.name
+                });
+                this.getHotels();
+            },
+            error:(err)=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: err.error.message
+                })
+            }
+        })
+    }
+
 }

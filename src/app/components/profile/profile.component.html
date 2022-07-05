@@ -11,33 +11,39 @@
               <!-- <img class="image"  *ngIf="_usuarioService.obtenerIdentidad().imagen === null" src="/assets/img/usuarios/User.png"/> -->
             </div>
             <div class="row">
-              <div class="text-center">
-                <h4>Perfil</h4>
+              <div class="text-center text-bg">
+                <h4>My Profile</h4>
                 <br />
               </div>
               <div class="panel-footer"></div>
               <div class="container text-center">
                 <p>
-                  <small>Nombre</small>
+                  <small>Name</small>
                    {{UserRest.getIdentity().name}} 
                 </p>
                 <p>
-                  <small>Tipo Empresa</small>
-                  {{UserRest.getIdentity().typeOfCompany}}
+                  <small>Username</small>
+                  {{UserRest.getIdentity().username}}
                 </p>
                 <p>
                   <small>Email</small>
                   {{UserRest.getIdentity().email}}
                 </p>
+                <p>
+                  <small>Phone</small>
+                  {{UserRest.getIdentity().phone}}
+                </p>
+                
+
               </div>
             </div>
             <div class="text-center">
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">Seleccionar Foto De Perfil</button>
+              data-bs-target="#exampleModal">Choose photo</button>
               <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
-              data-bs-target="#EliminarUser">Eliminar Perfil</button>
+              data-bs-target="#EliminarUser">Delete profile</button>
               <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
-              data-bs-target="#EditarUser">Editar Perfil</button>
+              data-bs-target="#EditarUser">Update Profile</button>
             </div>
           </div>
         </div>
@@ -50,43 +56,38 @@
 <div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar mi perfil</h5>
+      <div class="modal-header" style="background-color: #1EE9EC;">
+        <h5 class="modal-title"   id="exampleModalLabel">Update My Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
         <form>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nombres</label>
+            <label for="exampleInputPassword1" class="form-label">Name</label>
             <input type="text" class="form-control"
             name="email" #name="ngModel" [(ngModel)]="ProfileModel.name">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">typeOfCompany</label>
-            <input type="text" class="form-control" >
-          </div>
-          <!-- <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Usuario</label>
-            <input type="text" class="form-control"
-            name="usuario" #usuario="ngModel" [(ngModel)]="ProfileModel.usuario">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input type="email" class="form-control" name="username" #username="ngModel" [(ngModel)]="ProfileModel.username">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Edad</label>
-            <input type="number" class="form-control"
-            name="edad" #edad="ngModel" [(ngModel)]="ProfileModel.edad">
-          </div> -->
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Correo</label>
-            <input type="email" class="form-control">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="ProfileModel.email" >
           </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Phone</label>
+            <input type="email" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="ProfileModel.phone">
+          </div>
+         
 
         </form>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" (click)="updateHotel()">Guardar Cambios</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning" (click)="userUpdate()">Save Changes</button>
       </div>
     </div>
   </div>
@@ -98,16 +99,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">ELIMINAR PERFIL</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Delete My Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       Are you sure you want to delete the profile?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-         (click)="deleteHotel(UserRest.getIdentity()._id)">Eliminar</button>
+         (click)="deleteHotel(UserRest.getIdentity()._id)">Delete</button>
       </div>
     </div>
   </div>

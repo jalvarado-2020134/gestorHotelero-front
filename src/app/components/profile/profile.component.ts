@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserModel } from "src/app/models/user.model";
 import {UserRestService} from 'src/app/services/userRest/user-rest.service';
 import { UploadImageService } from 'src/app/services/uploadImage/upload-image.service';
@@ -19,20 +20,21 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     public UserRest: UserRestService, 
+    private router: Router,
     private uploadImageRest: UploadImageService) {
     this.ProfileModel = new UserModel('', '', '', '','','','');
     this.url = environment.baseUrl;
   }
   ngOnInit(): void {}
 
-  updateHotel() {
+  userUpdate() {
     this.userGetId = this.UserRest.getIdentity();
-    this.UserRest.updateHotel(
+    this.UserRest.userUpdate(
       this.userGetId._id,
       this.ProfileModel
     ).subscribe({
       next: (res: any) => {
-        this.identity = res.updateHotel;
+        this.identity = res.userUpdate;
         localStorage.setItem('identity', JSON.stringify(this.identity));
         Swal.fire({
           icon: 'success',
@@ -50,6 +52,8 @@ export class ProfileComponent implements OnInit {
           icon: 'warning',
           title: res.message,
         });
+        localStorage.clear();
+        this.router.navigateByUrl('');
         //this.get_company();
       },
       error: (err) => {

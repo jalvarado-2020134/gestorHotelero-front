@@ -52,7 +52,7 @@ export class UserRestService{
         return this.http.post(environment.baseUrl + 'user/register', params, {headers: this.httpOptions});
     }
 
-    updateHotel(id:string,params:{}){
+    userUpdate(id:string,params:{}){
         return this.http.put(environment.baseUrl + 'user/update/' + id,params,{headers:this.httpOptions});
     }
     

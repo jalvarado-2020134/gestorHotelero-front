@@ -8,7 +8,7 @@
 </div>
 
 <div>
-<div class="text-center mt-2 mb-2">
+<div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
     <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newHotel">
         <span class="icon">
         </span>
@@ -22,22 +22,28 @@
         <div class="card-body">
           <h5 class="card-title">Address:  {{hotel.address}}</h5>
           <h5 class="card-title">Phone:  {{hotel.phone}}</h5>
-          <h5 class="card-title">Times Request:  {{hotel.timesRequest}}</h5>
-          <p class="card-subtutle">Manager: {{hotel.manager}}</p>
-          <button class="btn btn-warning m-2" data-bs-toggle="offcanvas" 
-          data-bs-target="#offcanvasExample" 
-          aria-controls="offcanvasExample">
+          <p class="card-subtutle">Manager: {{hotel.manager.name}}</p>
+           <div *ngIf="token && identity.role === 'CLIENT'"> <button routerLink="/reservation" class="btn btn-success">Make Reservation</button></div>
+           <div *ngIf="token && identity.role === 'ADMIN'">
+           <button (click)="getHotel(hotel._id)" class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#updateHotel" class="btn btn-warning m-2">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
             Update
         </button>
-        <button class="btn btn-danger">Delete</button>
+        <button (click)="deleteHotel(hotel._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+        </div>
+        <div *ngIf="token && identity.role === 'MANAGER'" class="text-center ms-3">
+            <button routerLink="/services" class="btn btn-warning btn-icon-split text-left" >Services</button><br><br>
+            <button routerLink="/events" class="btn btn-primary btn-icon-split">Events</button><br><br>
+            <button routerLink="/rooms" class="btn btn-success btn-icon-split">Rooms</button>
         </div>
       </div>
+</div>
 </div>
 
 <div class="modal fade" id="newHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: #1EE9EC;">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i> 
                     &nbsp; New Hotel
                 </h5>
@@ -72,6 +78,47 @@
                         </button>
                         <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floopy-o" aria-hidden="true">Save Changes</i>
 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateHotel" tabindex="-1" aria-labelledby="updateHotel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #1EE9EC;">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-pencil" aria-hidden="true">Update Hotel</i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="updateHotel()" *ngIf="hotelUpdate">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="hotelUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input [(ngModel)]="hotelUpdate.address" name="address" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input [(ngModel)]="hotelUpdate.phone" name="phone" type="text" class="form-control">
+                    </div>
+                    <label class="form-label">MANAGER</label>
+                    <select [(ngModel)]="hotelUpdate.manager" name="role" class="form-select" aria-label="Default select example">
+                        <option disabled value="">Update Manager</option>
+                        <option *ngFor="let user of users" value="{{user._id}}">{{user.name}}</option>
+                    </select>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true">Discard</i>
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                            <i class="fa fa-floopy-o" aria-hidden="true">Update Hotel</i>
                         </button>
                     </div>
                 </form>
