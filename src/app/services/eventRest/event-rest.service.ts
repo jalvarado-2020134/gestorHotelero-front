@@ -34,6 +34,8 @@ export class EventRestService{
     }
 
     deleteEvent(id: string){
-        return this.http.delete(environment.baseUrl + 'event/deleteEvent/' + id,{headers: this.httpOptions})
+        return this.http.delete(environment.baseUrl + 'event/deleteEvent/' + id,{headers: this.httpOptions});
     }
+
+   
 }

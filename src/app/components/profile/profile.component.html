@@ -1,5 +1,8 @@
 <app-navbar></app-navbar>
+
+  
 <div class="container-fluid user-profile">
+  
     <div class="row">
       <div class="col-xs-12">
         <div class="well well-sm">
@@ -40,9 +43,9 @@
             <div class="text-center">
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
               data-bs-target="#exampleModal">Choose photo</button>
-              <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
+              <button type="submit" class="btn btn-danger m-2" data-bs-toggle="modal"
               data-bs-target="#EliminarUser">Delete profile</button>
-              <button type="submit" class="btn btn-primary m-2" data-bs-toggle="modal"
+              <button type="submit" class="btn btn-info m-2" data-bs-toggle="modal"
               data-bs-target="#EditarUser">Update Profile</button>
             </div>
           </div>
@@ -50,13 +53,11 @@
       </div>
     </div>
   </div>
-
-
   <!--MODAL EDITAR USUARIO-->
 <div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #1EE9EC;">
+      <div class="modal-header" style="background-color: #5DADE2;">
         <h5 class="modal-title"   id="exampleModalLabel">Update My Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -86,8 +87,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" data-bs-dismiss="modal" class="btn btn-warning" (click)="userUpdate()">Save Changes</button>
+        <button type="button" class="btn btn-danger text-center" data-bs-dismiss="modal">Close</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning text-center" (click)="userUpdate()">Save Changes</button>
       </div>
     </div>
   </div>

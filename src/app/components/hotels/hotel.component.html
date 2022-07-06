@@ -29,7 +29,7 @@
 </div>
 <div class="wrapper" *ngIf="hotels">
     <div  class="card text-dark mb-3" style="background-color: #AED6F1;" *ngFor="let hotel of hotels | search:search">
-        <div class="card-header text-center" style=" border-radius: 6%; background-color: #1281cc;">{{hotel.name}}</div>
+        <div class="card-header text-center" style=" border-radius: 6%; background-color: #5DADE2;">{{hotel.name}}</div>
         <div class="card-body">
           <h5 class="card-title">Address:  {{hotel.address}}</h5>
           <h5 class="card-title">Phone:  {{hotel.phone}}</h5>
@@ -49,7 +49,7 @@
 <div class="modal fade" id="newHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #1EE9EC;">
+            <div class="modal-header" style="background-color: #5DADE2;">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i> 
                     &nbsp; New Hotel
                 </h5>

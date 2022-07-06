@@ -7,6 +7,7 @@ import {UserComponent} from './components/Users/user.component';
 import {HotelComponent} from './components/hotels/hotel.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
+import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'users', component: UserComponent},
   {path: 'hotels', component: HotelComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'events', component: EventComponent}
+  {path: 'events', component: EventComponent},
+  {path: 'typeEvent', component: TypeEventComponent},
   
 ];
 

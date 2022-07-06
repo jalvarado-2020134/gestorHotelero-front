@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { EventModel } from "src/app/models/event.model";
 import { EventRestService } from "src/app/services/eventRest/event-rest.service";
 import { HotelRestService } from "src/app/services/hotelRest/hotel-res.service";
+import { TypeEventRestService } from "src/app/services/typeEventRest/type-event-rest.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -17,17 +18,20 @@ export class EventComponent implements OnInit {
     hotels: any;
     eventUpdate: any
     newDate: any;
+    typeEvents: any;
 
     constructor(
         private eventRest: EventRestService,
-        public hotelRest: HotelRestService
+        public hotelRest: HotelRestService,
+        public typeEventRest: TypeEventRestService
     ) {
-        this.event = new EventModel('', '', '', '', '');
+        this.event = new EventModel('', '', '', '', '','');
     }
 
     ngOnInit(): void {
         this.getHotels();
         this.getEvents();
+        this.getTypeEvents();
     }
 
     getEvents() {
@@ -55,6 +59,17 @@ export class EventComponent implements OnInit {
             error: (err) => console.log(err)
         })
     }
+
+    getTypeEvents(){
+        this.typeEventRest.getTypesEvents().subscribe({
+            next:(res:any)=>{
+                this.typeEvents = res.typeEvent,
+                console.log(res.typeEvent);
+            },
+            error: (err)=> console.log(err)
+        })
+    }
+
 
     newEvent(newEventForm: any) {
         this.eventRest.newEvent(this.event).subscribe({

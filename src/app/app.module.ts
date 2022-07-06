@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { HotelComponent } from './components/hotels/hotel.component';
 import {SearchPipe} from './pipes/search.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
+import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {EventComponent} from './components/events/event.component';
     HotelComponent,
     SearchPipe,
     ProfileComponent,
-    EventComponent
+    EventComponent,
+    TypeEventComponent
     
     
   ],
