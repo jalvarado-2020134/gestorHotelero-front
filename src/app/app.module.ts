@@ -14,6 +14,7 @@ import {SearchPipe} from './pipes/search.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
+import {ServiceComponent} from './components/services/service.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
     SearchPipe,
     ProfileComponent,
     EventComponent,
-    TypeEventComponent
+    TypeEventComponent,
+    ServiceComponent
     
     
   ],

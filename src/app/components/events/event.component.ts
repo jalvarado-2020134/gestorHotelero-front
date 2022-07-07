@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { UserRestService } from "src/app/services/userRest/user-rest.service";
 import { EventModel } from "src/app/models/event.model";
 import { EventRestService } from "src/app/services/eventRest/event-rest.service";
 import { HotelRestService } from "src/app/services/hotelRest/hotel-res.service";
@@ -12,6 +13,9 @@ import Swal from "sweetalert2";
 })
 
 export class EventComponent implements OnInit {
+    token: any;
+    identity: any;
+    role: any;
     events: any;
     event: EventModel;
     search: any;
@@ -22,16 +26,20 @@ export class EventComponent implements OnInit {
 
     constructor(
         private eventRest: EventRestService,
+        private userRest: UserRestService,
         public hotelRest: HotelRestService,
         public typeEventRest: TypeEventRestService
     ) {
-        this.event = new EventModel('', '', '', '', '','');
+        this.event = new EventModel('', '', '', '', '', '');
     }
 
     ngOnInit(): void {
         this.getHotels();
         this.getEvents();
         this.getTypeEvents();
+        this.token = this.userRest.getToken();
+        this.identity = this.userRest.getIdentity();
+        this.role = this.userRest.getIdentity().role;
     }
 
     getEvents() {
@@ -60,13 +68,13 @@ export class EventComponent implements OnInit {
         })
     }
 
-    getTypeEvents(){
+    getTypeEvents() {
         this.typeEventRest.getTypesEvents().subscribe({
-            next:(res:any)=>{
+            next: (res: any) => {
                 this.typeEvents = res.typeEvent,
-                console.log(res.typeEvent);
+                    console.log(res.typeEvent);
             },
-            error: (err)=> console.log(err)
+            error: (err) => console.log(err)
         })
     }
 
@@ -92,25 +100,25 @@ export class EventComponent implements OnInit {
 
 
     }
-    getEvent(id:string) {
+    getEvent(id: string) {
         this.eventRest.getEvent(id).subscribe({
-            next: (res:any)=>{
+            next: (res: any) => {
                 this.eventUpdate = res.event
             },
-            error: (err)=>{alert(err.error.message)}
+            error: (err) => { alert(err.error.message) }
         })
     }
 
-    updateEvent(){
+    updateEvent() {
         this.eventRest.updateEvent(this.eventUpdate._id, this.eventUpdate).subscribe({
-            next: (res:any)=>{
+            next: (res: any) => {
                 Swal.fire({
                     icon: 'success',
                     title: res.message
                 });
                 this.getEvents();
             },
-            error: (err)=>{
+            error: (err) => {
                 Swal.fire({
                     icon: 'success',
                     title: err.error.message || err.error,
@@ -120,22 +128,35 @@ export class EventComponent implements OnInit {
     }
 
     deleteEvent(id:string){
-        this.eventRest.deleteEvent(id).subscribe({
-            next:(res:any)=>{
-                Swal.fire({
-                    icon: 'success',
-                    title: res.message + ' : ' + res.deleteEvent.name
-                });
-                this.getEvents();
-            },
-            error:(err)=>{
-                Swal.fire({
-                    icon: 'success',
-                    title: err.error.message
+        Swal.fire({
+            title: 'Are you sure you want to delete this event?',
+            showDenyButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: 'Cancel',
+            confirmButtonColor: '#DC3311',
+            denyButtonColor: '#118CDC'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                this.eventRest.deleteEvent(id).subscribe({
+                    next:(res:any)=>{
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.message + ' : ' + res.deleteEvent.name,
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        this.getEvents();
+                    },
+                    error:(err)=>{
+                        Swal.fire({
+                            icon: 'error',
+                            title: err.error.message
+                        })
+                        this.getEvents();
+                    }
                 })
             }
         })
     }
-
-
 }

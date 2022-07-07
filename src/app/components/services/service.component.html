@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="token && identity.role === 'MANAGER'" class="text-left mt-2 mb-2">
+    <button routerLink="/hotels" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+        </span>
+        <span class="text">Back To Hotels</span>
+</button>
+</div>
+<div class="form-input mt-5">
+    <input [(ngModel)]="search" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
+
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newService">
+        <span class="icon">
+            <i class="fa fa-bell-concierge" aria-hidden="false"></i>
+        </span>
+        <span class="text">   New  Service</span>
+    </button>
+</div>
+
+<div class="wrapper">
+    <div  class="card text-dark mb-3" style="background-color: #80C0F1;" *ngFor="let service of services | search:search">
+        <h3>
+        <div class="card-header text-center" style=" border-radius: 6%; background-color: #068BF3;">{{service.name}}</div></h3>
+        <div class="card-body">
+          <h5 class="card-title text-center">Description:  {{service.description}}</h5>
+          <h5 class="card-title text-center">Q.  {{service.price}}.00</h5>
+          <h5 class="card-subtutle text-center text-muted">Hotel: {{service.hotel.name}}</h5>
+           <button (click)="getService(service._id)" class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#serviceUpdate" class="btn btn-warning m-2">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+            Update
+        </button>
+        <button (click)="deleteService(service._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+        </div>
+      </div>
+</div>
+
+
+<div class="modal fade" id="newService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-bell-concierge" aria-hidden="true"></i>
+                &nbsp;New    ___Service</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            <div class="modal-body">
+                <form (ngSubmit)="newService(newServiceForm)" #newServiceForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="service.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="service.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input [(ngModel)]="service.price" name="price" type="number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hotel</label>
+                        <select [(ngModel)]="service.hotel" name="hotel" class="form-select" aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Hotel</option>
+                            <option *ngFor="let hotel of hotels" value="{{hotel._id}}">{{hotel.name}}</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>Discard
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save Changes
+
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="serviceUpdate" tabindex="-1" aria-labelledby="serviceUpdate" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #5DADE2;">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true">Update Service</i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="serviceUpdate()" *ngIf="updateService" >
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="updateService.name" name="name" class="form-control" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="updateService.description" name="description" class="form-control" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input [(ngModel)]="updateService.price" name="date" class="form-control" type="text">
+                    </div>
+                    
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Discard
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floopy-o" aria-hidden="true">Save Changes</i>
+
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

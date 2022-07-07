@@ -8,6 +8,7 @@ import {HotelComponent} from './components/hotels/hotel.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
+import {ServiceComponent} from './components/services/service.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'events', component: EventComponent},
   {path: 'typeEvent', component: TypeEventComponent},
+  {path: 'services', component: ServiceComponent},
   
 ];
 

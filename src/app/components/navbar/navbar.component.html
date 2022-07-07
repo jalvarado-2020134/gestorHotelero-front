@@ -9,8 +9,9 @@
         <a class="nav-link active" routerLink="/home" aria-current="page"  *ngIf="" >Home</a> 
         <a *ngIf="token && identity.role === 'ADMIN'" class="nav-link active" routerLink="/users" aria-current="page" >Users</a>
         <a class="nav-link active" routerLink="/hotels" aria-current="page" *ngIf="token">Hotels</a>
-        <a class="nav-link active" routerLink="/events" aria-current="page" *ngIf="token">Events</a>
-        <a class="nav-link active" routerLink="/profile" aria-current="page" *ngIf="token">My Profile</a>
+        <a *ngIf="token && identity.role === 'ADMIN' || identity.role === 'CLIENT'"   class="nav-link active" routerLink="/events" aria-current="page">Events</a>
+        <a *ngIf="token && identity.role === 'ADMIN' || identity.role === 'CLIENT'" class="nav-link active" routerLink="/services" aria-current="page" >Services</a>
+        <a   class="nav-link active" routerLink="/profile" aria-current="page" *ngIf="token">My Profile</a>
 
 
         <a *ngIf="!token" class="nav-link" routerLink="/login">Login</a>

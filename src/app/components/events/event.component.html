@@ -1,5 +1,14 @@
 <app-navbar></app-navbar>
 
+
+<div *ngIf="token && identity.role === 'MANAGER'" class="text-left mt-2 mb-2">
+    <button routerLink="/hotels" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+        </span>
+        <span class="text">Back To Hotels</span>
+</button>
+</div>
 <div class="form-input mt-4">
     <input [(ngModel)]="search" placeholder="Search...">
     <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
@@ -8,6 +17,7 @@
 <div class="text-center mt-2 mb-2">
     <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newEvent">
         <span class="icon">
+            <i class="fas fa-champagne-glasses"></i>
         </span>
         <span class="text">New Event</span>
     </button>
@@ -32,7 +42,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #5DADE2;">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-building" aria-hidden="true"></i>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-champagne-glasses"></i>
                 &nbsp; New Event </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
