@@ -20,11 +20,14 @@ export class UploadImageService {
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
 
-      let uri = environment.baseUrl + 'company/uploadImage/'+ userId;
+      let uri = environment.baseUrl + 'user/uploadImage/'+ userId;
+      console.log(files)
 
-      for(var x = 0; x < files.length; x++){
-        formData.append(name, files[x], files[x].name);
-      }
+      //for(var x = 0; x < files.length; x++){
+        formData.append('image', files[0], files[0].name);
+      //}
+      console.log(files[0])
+
 
       xhr.onreadystatechange = ()=>{
         if(xhr.readyState == 4){ 
@@ -43,3 +46,4 @@ export class UploadImageService {
   }
 
 }
+

@@ -42,4 +42,6 @@ export class TypeEventComponent implements OnInit{
             error: (err)=>{alert(err.error.message)}
         })
     }
+
+    
 }

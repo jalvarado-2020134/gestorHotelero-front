@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 import {ServiceComponent} from './components/services/service.component';
+import { HotelPipe } from './pipes/hotel.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {ServiceComponent} from './components/services/service.component';
     ProfileComponent,
     EventComponent,
     TypeEventComponent,
-    ServiceComponent
+    ServiceComponent,
+    HotelPipe,
     
     
   ],

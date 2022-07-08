@@ -9,8 +9,13 @@
         <span class="text">Back To Hotels</span>
 </button>
 </div>
-<div class="form-input mt-4">
-    <input [(ngModel)]="search" placeholder="Search...">
+<div *ngIf="token && identity.role === 'MANAGER' || identity.role === 'CLIENT'" class="form-input mt-5">
+    <input [(ngModel)]="hotel" placeholder="Search Event by Hotel">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+
+<div  *ngIf="token && identity.role === 'ADMIN'" class="form-input mt-5">
+    <input [(ngModel)]="search" placeholder="Search Event by Name">
     <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
 </div>
 <br>
@@ -26,12 +31,12 @@
 
 <div class="container">
     <div class="products-container">
-        <div *ngFor="let event of events | search:search" class="products" data-name="p-1">
+        <div *ngFor="let event of events | search:search | hotel:hotel" class="products" data-name="p-1">
             <h4 class="card-title">{{event.name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">Description:  {{event.description}}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Date:  {{event.date}}</h6>
-            <p class="card-text">Type Event:  {{event.typeEvent.name}}</p>
-            <p class="card-text">Hotel:  {{event.hotel.name}}</p>
+            <h5 class="card-text text-muted">Type Event:  {{event.typeEvent.name}}</h5>
+            <h6 class="card-text">Hotel:  {{event.hotel.name}}</h6>
             <button (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i>Update</button>
             <button (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true">Delete</i></button>
         </div>
@@ -109,6 +114,15 @@
                             <label class="form-label">Data</label>
                             <input [(ngModel)]="eventUpdate.date" name="date" class="form-control" type="date">
                         </div>
+                       <div class="mb-3">
+                        <label class="form-label">Type Event</label>
+                        <select [(ngModel)]="eventUpdate.typeEvent"  name="typeEvent" class="form-select" aria-label="Default select example">
+                            <option disabled  value="" selected>Choose a Type Event</option>
+                            <option *ngFor="let typeEvent of typeEvents" value="{{typeEvent._id}}">
+                                {{typeEvent.name}}
+                            </option>
+                        </select>
+                       </div>
                         
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Discard

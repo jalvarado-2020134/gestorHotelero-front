@@ -2,6 +2,7 @@
     position: relative;
     padding-top: 0;
     overflow: hidden;
+    background-color: #FEBB0B;
   }
   
   .user-profile-card .user-profile-header {
@@ -26,7 +27,7 @@
     border: 2px solid rgba(255,255,255,0.5);
   }
   
-  .user-profile small {
+  .card-container small {
     display: block;
     line-height: 1.428571429;
     color: #999;
@@ -49,3 +50,8 @@
     left: 30px;
   }
   
+  input{
+    height: auto;
+    background-color: #AED6F1;
+    background-size: auto;
+}

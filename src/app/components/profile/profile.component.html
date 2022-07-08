@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
   
-<div class="container-fluid user-profile">
+<div class="card-container">
   
     <div class="row">
       <div class="col-xs-12">
@@ -10,7 +10,7 @@
             <div class="user-profile-header">
             </div>
             <div class="user-profile-avatar text-center">
-              <img class="image"  *ngIf="UserRest.getIdentity().image" [src]="this.url + 'company/getImage/' + UserRest.getIdentity().image"/>
+              <img crossorigin="anonymous" class="image"  *ngIf="UserRest.getIdentity().image" [src]="this.url + 'user/getImage/' + UserRest.getIdentity().image"/>
               <!-- <img class="image"  *ngIf="_usuarioService.obtenerIdentidad().imagen === null" src="/assets/img/usuarios/User.png"/> -->
             </div>
             <div class="row">
@@ -20,6 +20,10 @@
               </div>
               <div class="panel-footer"></div>
               <div class="container text-center">
+                <h3 class="text-warning">
+                  <small>Role</small>
+                  {{UserRest.getIdentity().role}}
+                </h3>
                 <p>
                   <small>Name</small>
                    {{UserRest.getIdentity().name}} 
@@ -38,15 +42,17 @@
                 </p>
                 
 
+
               </div>
             </div>
             <div class="text-center">
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
               data-bs-target="#exampleModal">Choose photo</button>
-              <button type="submit" class="btn btn-danger m-2" data-bs-toggle="modal"
-              data-bs-target="#EliminarUser">Delete profile</button>
+              
               <button type="submit" class="btn btn-info m-2" data-bs-toggle="modal"
-              data-bs-target="#EditarUser">Update Profile</button>
+              data-bs-target="#EditarUser">Update profile</button>
+              <button type="submit" class="btn btn-danger m-2" data-bs-toggle="modal"
+              (click)="deleteHotel(UserRest.getIdentity()._id)">Delete profile</button>
             </div>
           </div>
         </div>
@@ -63,7 +69,7 @@
       </div>
       <div class="modal-body">
 
-        <form>
+        <form  *ngIf="UserRest.getIdentity()">
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Name</label>
             <input type="text" class="form-control"
@@ -81,7 +87,7 @@
             <label for="exampleInputEmail1" class="form-label">Phone</label>
             <input type="email" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="ProfileModel.phone">
           </div>
-         
+          
 
         </form>
 
@@ -95,25 +101,7 @@
 </div>
 
 
-<!--MODAL ELIMINAR USUARIO-->
-<div class="modal fade" id="EliminarUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Delete My Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      Are you sure you want to delete the profile?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-         (click)="deleteHotel(UserRest.getIdentity()._id)">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

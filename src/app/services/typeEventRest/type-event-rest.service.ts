@@ -25,4 +25,8 @@ export class TypeEventRestService{
     getTypeEvent(id:string){
         return this.http.get(environment.baseUrl + 'typeEvent/getType/' + id,{headers:this.httpOptions})
     }
+
+    updateTypeEvent(id:string, params:{}){
+        return this.http.put(environment.baseUrl + 'typeEvent/updateType/'+ id,params,{headers:this.httpOptions})
+    }
 }

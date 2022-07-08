@@ -19,6 +19,7 @@ export class EventComponent implements OnInit {
     events: any;
     event: EventModel;
     search: any;
+    hotel: any;
     hotels: any;
     eventUpdate: any
     newDate: any;
@@ -84,7 +85,9 @@ export class EventComponent implements OnInit {
             next: (res: any) => {
                 Swal.fire({
                     icon: 'success',
-                    title: res.message
+                    title: res.message,
+                    confirmButtonColor: '#28B463'
+
                 });
                 this.getEvents();
                 newEventForm.reset();
@@ -114,7 +117,8 @@ export class EventComponent implements OnInit {
             next: (res: any) => {
                 Swal.fire({
                     icon: 'success',
-                    title: res.message
+                    title: res.message,
+                    confirmButtonColor: '#E74C3C'
                 });
                 this.getEvents();
             },

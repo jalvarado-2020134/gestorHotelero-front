@@ -211,7 +211,12 @@
      border-radius: 0 36px 36px 0;
      cursor: pointer;
  }
- 
+ input{
+   height: auto;
+   background-color: #AED6F1;
+   background-size: auto;
+}
+
  hr
  {
      color: grey

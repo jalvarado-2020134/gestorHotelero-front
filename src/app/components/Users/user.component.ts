@@ -50,6 +50,8 @@ export class UserComponent implements OnInit{
                     Swal.fire({
                         icon: 'success',
                         title: res.message,
+                        confirmButtonColor: '#28B463'
+
                     });
                     this.getUsers();
                     newUserForm.reset();
@@ -70,6 +72,8 @@ export class UserComponent implements OnInit{
                     Swal.fire({
                         icon: 'success',
                         title: res.message,
+                        confirmButtonColor: '#E74C3C'
+
                     });
                     this.getUsers();
                 },
@@ -85,20 +89,35 @@ export class UserComponent implements OnInit{
         }
 
         userDeleted(id:string){
-            this.userRest.userDeleted(id).subscribe({
-                next:(res:any)=>{
-                    Swal.fire({
-                        icon: 'success',
-                        title: res.message + ' : ' + res.userDeleted.name
-                    });
-                    this.getUsers();
-                },
-                error:(err)=>{
-                    Swal.fire({
-                        icon: 'error',
-                        title: err.error.message
+            Swal.fire({
+                title: 'Are you sure you want to delete this user?',
+                showDenyButton: true,
+                confirmButtonText: 'Delete',
+                denyButtonText: 'Cancel',
+                confirmButtonColor: '#DC3311',
+                denyButtonColor: '#118CDC'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    this.userRest.userDeleted(id).subscribe({
+                        next:(res:any)=>{
+                            Swal.fire({
+                                icon: 'success',
+                                title: res.message + ' : ' + res.userDeleted.name,
+                                position: 'center',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            this.getUsers();
+                        },
+                        error:(err)=>{
+                            Swal.fire({
+                                icon: 'error',
+                                title: err.error.message
+                            })
+                            this.getUsers();
+                        }
                     })
                 }
             })
         }
-}
+    }

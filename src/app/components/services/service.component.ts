@@ -79,6 +79,8 @@ export class ServiceComponent implements OnInit{
                 Swal.fire({
                     icon: 'success',
                     title: res.message,
+                    confirmButtonColor: '#28B463'
+
 
                 });
                 this.getServices();
@@ -97,7 +99,8 @@ export class ServiceComponent implements OnInit{
     getService(id:string){
         this.serviceRest.getService(id).subscribe({
             next: (res:any)=>{
-                this.updateService = res.service;
+                this.updateService = res.service
+                console.log(this.updateService)
             },
             error: (err)=>{alert(err.error.message)}
         })
@@ -108,7 +111,9 @@ export class ServiceComponent implements OnInit{
             next:(res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message
+                    title: res.message,
+                    confirmButtonColor: '#E74C3C'
+
                 });
                 this.getServices();
             },

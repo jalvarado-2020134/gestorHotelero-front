@@ -114,21 +114,35 @@ export class HotelComponent implements OnInit{
     }
 
     deleteHotel(id:string){
-        this.hotelRest.deleteHotel(id).subscribe({
-            next: (res:any)=>{
-                Swal.fire({
-                    icon: 'success',
-                    title: res.message + ' : ' + res.deleteHotel.name
-                });
-                this.getHotels();
-            },
-            error:(err)=>{
-                Swal.fire({
-                    icon: 'error',
-                    title: err.error.message
+        Swal.fire({
+            title: 'Are you sure you want to delete this hotel?',
+            showDenyButton: true,
+            confirmButtonText: 'Delete',
+            denyButtonText: 'Cancel',
+            confirmButtonColor: '#DC3311',
+            denyButtonColor: '#118CDC'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                this.hotelRest.deleteHotel(id).subscribe({
+                    next:(res:any)=>{
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.message + ' : ' + res.deleteHotel.name,
+                            position: 'center',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        this.getHotels();
+                    },
+                    error:(err)=>{
+                        Swal.fire({
+                            icon: 'error',
+                            title: err.error.message
+                        })
+                        this.getHotels();
+                    }
                 })
             }
         })
     }
-
 }
