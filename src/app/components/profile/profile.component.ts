@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit {
           icon: 'success',
           title: res.message,
         });
+        this.UserRest.getIdentity();
       },
       error: (err) => alert(err.error.message || err.error),
     });
@@ -59,9 +60,9 @@ export class ProfileComponent implements OnInit {
           next: (res: any) => {
             Swal.fire({
               icon: 'success',
-              title: res.message + ' : ' + res.deleteUser.name,
+              title: res.message + '  ' + res.deleteUser.name + ' has been deleted ',
               position: 'center',
-              showConfirmButton: false,
+              showConfirmButton: true,
               timer: 2000
             });
             localStorage.clear();

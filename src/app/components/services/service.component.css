@@ -457,6 +457,12 @@ hr
 {
   color: #003474;
 }
+input{
+   height: auto;
+   background-color: #AED6F1;
+   background-size: auto;
+}
+
 
 th
 {

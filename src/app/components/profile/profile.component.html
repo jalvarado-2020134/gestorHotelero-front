@@ -1,125 +1,154 @@
 <app-navbar></app-navbar>
 
-  
-<div class="card-container">
-  
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="well well-sm">
-          <div class="user-profile-card">
-            <div class="user-profile-header">
-            </div>
-            <div class="user-profile-avatar text-center">
-              <img crossorigin="anonymous" class="image"  *ngIf="UserRest.getIdentity().image" [src]="this.url + 'user/getImage/' + UserRest.getIdentity().image"/>
-              <!-- <img class="image"  *ngIf="_usuarioService.obtenerIdentidad().imagen === null" src="/assets/img/usuarios/User.png"/> -->
-            </div>
-            <div class="row">
-              <div class="text-center text-bg">
-                <h4>My Profile</h4>
-                <br />
-              </div>
-              <div class="panel-footer"></div>
-              <div class="container text-center">
-                <h3 class="text-warning">
-                  <small>Role</small>
-                  {{UserRest.getIdentity().role}}
-                </h3>
-                <p>
-                  <small>Name</small>
-                   {{UserRest.getIdentity().name}} 
-                </p>
-                <p>
-                  <small>Username</small>
-                  {{UserRest.getIdentity().username}}
-                </p>
-                <p>
-                  <small>Email</small>
-                  {{UserRest.getIdentity().email}}
-                </p>
-                <p>
-                  <small>Phone</small>
-                  {{UserRest.getIdentity().phone}}
-                </p>
-                
+<body>
+
+  <section class="seccion-perfil-usuario">
+    <div class="perfil-usuario-header">
+      <div class="perfil-usuario-portada">
+        <div class="perfil-usuario-avatar">
+          <img crossorigin="anonymous" class="image" *ngIf="UserRest.getIdentity().image"
+            [src]="this.url + 'user/getImage/' + UserRest.getIdentity().image" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrapper">
+    <div class="title">
+
+      <h3 class="text-warning">
+        <small></small>
+        {{UserRest.getIdentity().role}}
+      </h3>
+    </div>
+    <form autocomplete="off" class="form">
+      <div class="inputfield">
+        <label>Name</label>
+        <input disabled [(ngModel)]="UserRest.getIdentity().name" name="name" autocomplete="off" type="text" class="input">
+      </div>
+      <div class="inputfield">
+        <label>Username</label>
+        <input disabled [(ngModel)]="UserRest.getIdentity().username" name="username" autocomplete="off" type="text"
+          class="input">
+      </div>
+      <div class="inputfield">
+        <label>Email</label>
+        <input disabled  [(ngModel)]="UserRest.getIdentity().email" name="email" autocomplete="off" type="text" class="input">
+      </div>
+      <div class="inputfield">
+        <label>Phone</label>
+        <input disabled  [(ngModel)]="UserRest.getIdentity().phone" name="phone" autocomplete="off" type="text" class="input">
+      </div>
 
 
-              </div>
-            </div>
-            <div class="text-center">
-              <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">Choose photo</button>
-              
-              <button type="submit" class="btn btn-info m-2" data-bs-toggle="modal"
-              data-bs-target="#EditarUser">Update profile</button>
-              <button type="submit" class="btn btn-danger m-2" data-bs-toggle="modal"
-              (click)="deleteHotel(UserRest.getIdentity()._id)">Delete profile</button>
-            </div>
+      <div class="mt-5 modal-footer d-flex justify-content-center">
+        <button  type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteHotel">
+          <i class="fa fa-trash-alt" aria-hidden="true"></i> Delete Account
+        </button>
+        <button  type="submit" class="btn btn-success" data-bs-toggle="modal"
+        data-bs-target="#EditarUser">
+          <i class="fa fa-refresh" aria-hidden="true"></i> Update Account
+        </button>
+       
+        <button  type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+            class="fa fa-file-image-o" aria-hidden="true"></i>
+          Upload Image
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!--MODAL IMAGE-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upload image</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="image" class="form-label">Select image: </label>
+            <input (change)="filesChange($event)" type="file" class="form-control" id="image">
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="uploadImage()" type="submit" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div>
+
   <!--MODAL EDITAR USUARIO-->
-<div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #5DADE2;">
-        <h5 class="modal-title"   id="exampleModalLabel">Update My Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+  <div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #5DADE2;">
+          <h5 class="modal-title" id="exampleModalLabel">Update My Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
 
-        <form  *ngIf="UserRest.getIdentity()">
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Name</label>
-            <input type="text" class="form-control"
-            name="email" #name="ngModel" [(ngModel)]="ProfileModel.name">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input type="email" class="form-control" name="username" #username="ngModel" [(ngModel)]="ProfileModel.username">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Email</label>
-            <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="ProfileModel.email" >
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Phone</label>
-            <input type="email" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="ProfileModel.phone">
-          </div>
-          
-
-        </form>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger text-center" data-bs-dismiss="modal">Close</button>
-        <button type="button" data-bs-dismiss="modal" class="btn btn-warning text-center" (click)="userUpdate()">Save Changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+          <form *ngIf="UserRest.getIdentity()">
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Name</label>
+              <input type="text" class="form-control" name="email" #name="ngModel" [(ngModel)]="ProfileModel.name">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="email" class="form-control" name="username" #username="ngModel"
+                [(ngModel)]="ProfileModel.username">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Email</label>
+              <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="ProfileModel.email">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Phone</label>
+              <input type="email" class="form-control" name="phone" #phone="ngModel" [(ngModel)]="ProfileModel.phone">
+            </div>
 
 
+          </form>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Upload image</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="image" class="form-label">Select image: </label>
-          <input (change)="filesChange($event)" type="file" class="form-control" id="image">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger text-center" data-bs-dismiss="modal">Close</button>
+          <button type="submit" data-bs-dismiss="modal" class="btn btn-warning text-center" (click)="userUpdate()">Save
+            Changes</button>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button (click)="uploadImage()" type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Delete Account:
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input  placeholder="Enter your Password for Delete" name="password" type="password" class="form-control">
+          </div>
+          <div class=" modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              Cancel</button>
+            <button  (click)="deleteHotel(UserRest.getIdentity()._id)" type="submit" data-bs-dismiss="modal" class="btn btn-danger">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              Delete Account
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>

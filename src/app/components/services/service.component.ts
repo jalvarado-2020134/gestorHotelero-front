@@ -141,9 +141,9 @@ export class ServiceComponent implements OnInit{
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + ' : ' + res.deleteService.name,
+                            title: res.message + '  ' + res.deleteService.name + ' has been deleted ',
                             position: 'center',
-                            showConfirmButton: false,
+                            showConfirmButton: true,
                             timer: 2000
                         });
                         this.getServices();

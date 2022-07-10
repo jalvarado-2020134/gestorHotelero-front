@@ -66,11 +66,12 @@
 <div class="modal fade" id="newService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: #5DADE2" >
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-bell-concierge" aria-hidden="true"></i>
-                &nbsp;New    ___Service</h5>
+                &nbsp;New Service</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close">
                 </button>
+            </div>
             <div class="modal-body">
                 <form (ngSubmit)="newService(newServiceForm)" #newServiceForm="ngForm">
                     <div class="mb-3">
@@ -105,7 +106,6 @@
         </div>
     </div>
     </div>
-</div>
 
 <div class="modal fade" id="serviceUpdate"  tabindex="-1" aria-labelledby="serviceUpdateLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

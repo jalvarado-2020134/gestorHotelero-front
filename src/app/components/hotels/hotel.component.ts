@@ -127,9 +127,9 @@ export class HotelComponent implements OnInit{
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + ' : ' + res.deleteHotel.name,
+                            title: res.message + '  ' + res.deleteHotel.name + ' has been deleted ',
                             position: 'center',
-                            showConfirmButton: false,
+                            showConfirmButton: true,
                             timer: 2000
                         });
                         this.getHotels();
