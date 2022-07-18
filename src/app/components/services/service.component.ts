@@ -78,7 +78,7 @@ export class ServiceComponent implements OnInit{
             next:(res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.service.name + '" ' + ' has been saved ',
                     confirmButtonColor: '#28B463'
 
 
@@ -111,7 +111,7 @@ export class ServiceComponent implements OnInit{
             next:(res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.updateService.name + '" ' + ' has been updated ',
                     confirmButtonColor: '#E74C3C'
 
                 });
@@ -141,7 +141,7 @@ export class ServiceComponent implements OnInit{
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + '  ' + res.deleteService.name + ' has been deleted ',
+                            title: res.message +  ' "' + res.deleteService.name + '" ' + ' has been deleted ',
                             position: 'center',
                             showConfirmButton: true,
                             timer: 2000

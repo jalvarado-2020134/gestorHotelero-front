@@ -85,7 +85,7 @@ export class EventComponent implements OnInit {
             next: (res: any) => {
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.event.name + '" ' + ' has been saved ',
                     confirmButtonColor: '#28B463'
 
                 });
@@ -117,7 +117,7 @@ export class EventComponent implements OnInit {
             next: (res: any) => {
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.eventUpdate.name + '" ' + ' has been updated ',
                     confirmButtonColor: '#E74C3C'
                 });
                 this.getEvents();
@@ -145,7 +145,7 @@ export class EventComponent implements OnInit {
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + '  ' + res.deleteEvent.name + ' has been deleted ',
+                            title: res.message +  ' "' + res.deleteEvent.name + '" ' + ' has been deleted ',
                             position: 'center',
                             showConfirmButton: true,
                             timer: 2000

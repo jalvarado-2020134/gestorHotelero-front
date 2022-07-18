@@ -65,7 +65,7 @@ export class HotelComponent implements OnInit{
             next:(res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.hotel.name + '" ' + ' has been saved ',
                     confirmButtonColor: '#28B463'
                 });
                 this.getHotels();
@@ -97,7 +97,7 @@ export class HotelComponent implements OnInit{
             next: (res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message,
+                    title: res.message +  ' "' + res.hotelUpdate.name + '" ' + ' has been updated ',
                     confirmButtonColor: '#E74C3C'
 
                 });
@@ -127,7 +127,7 @@ export class HotelComponent implements OnInit{
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + '  ' + res.deleteHotel.name + ' has been deleted ',
+                            title: res.message +  ' "' + res.deleteHotel.name + '" ' + ' has been deleted ',
                             position: 'center',
                             showConfirmButton: true,
                             timer: 2000

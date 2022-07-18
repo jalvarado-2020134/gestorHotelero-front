@@ -23,20 +23,20 @@
     </div>
     <form autocomplete="off" class="form">
       <div class="inputfield">
-        <label>Name</label>
+        <label><i class="fa-solid fa-file-signature"></i> Name</label>
         <input disabled [(ngModel)]="UserRest.getIdentity().name" name="name" autocomplete="off" type="text" class="input">
       </div>
       <div class="inputfield">
-        <label>Username</label>
+        <label><i class="fa-solid fa-user-check"></i> Username</label>
         <input disabled [(ngModel)]="UserRest.getIdentity().username" name="username" autocomplete="off" type="text"
           class="input">
       </div>
       <div class="inputfield">
-        <label>Email</label>
+        <label><i class="fa-solid fa-at"></i>  Email</label>
         <input disabled  [(ngModel)]="UserRest.getIdentity().email" name="email" autocomplete="off" type="text" class="input">
       </div>
       <div class="inputfield">
-        <label>Phone</label>
+        <label><i class="fa-solid fa-phone"></i>  Phone</label>
         <input disabled  [(ngModel)]="UserRest.getIdentity().phone" name="phone" autocomplete="off" type="text" class="input">
       </div>
 
@@ -60,10 +60,10 @@
 
   <!--MODAL IMAGE-->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Upload image</h5>
+        <div class="modal-header" style="background-color: #5DADE2">
+          <h5 class="modal-title"  id="exampleModalLabel"> <i class="fa fa-file-image-o" aria-hidden="true"></i> Upload image</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -72,9 +72,9 @@
             <input (change)="filesChange($event)" type="file" class="form-control" id="image">
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button (click)="uploadImage()" type="submit" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> Close</button>
+          <button (click)="uploadImage()" type="submit" data-bs-dismiss="modal" class="btn btn-primary"> <i class="fa fa-file-image-o"></i> Save changes</button>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
 
   <!--MODAL EDITAR USUARIO-->
   <div class="modal fade" id="EditarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #5DADE2;">
           <h5 class="modal-title" id="exampleModalLabel">Update My Profile</h5>
@@ -113,9 +113,9 @@
           </form>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger text-center" data-bs-dismiss="modal">Close</button>
-          <button type="submit" data-bs-dismiss="modal" class="btn btn-warning text-center" (click)="userUpdate()">Save
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-danger text-center" data-bs-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> Close</button>
+          <button type="submit" data-bs-dismiss="modal" class="btn btn-warning text-center" (click)="userUpdate()">  <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
             Changes</button>
         </div>
       </div>

@@ -37,8 +37,8 @@
             <h6 class="card-subtitle mb-2 text-muted">Date:  {{event.date}}</h6>
             <h5 class="card-text text-muted">Type Event:  {{event.typeEvent.name}}</h5>
             <h6 class="card-text">Hotel:  {{event.hotel.name}}</h6>
-            <button (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i>Update</button>
-            <button (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true">Delete</i></button>
+            <button (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
+            <button (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </div>
     </div>
 </div>
@@ -83,8 +83,7 @@
                         <div class=" modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <i class="fa fa-times-circle"  aria-hidden="true"></i> Discard</button>
-                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
-                                    aria-hidden="true"></i> Save Event
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Add Event
                             </button>
                         </div>
                     </form>
@@ -97,7 +96,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #5DADE2;">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true">Update Event</i></h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"> Update Event</i></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -127,7 +126,8 @@
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Discard
                             </button>
-                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floopy-o" aria-hidden="true">Save Changes</i>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                Update Event
     
                             </button>
                         </div>

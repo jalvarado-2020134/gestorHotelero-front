@@ -9,6 +9,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 import {ServiceComponent} from './components/services/service.component';
+import {RoomComponent} from './components/rooms/room.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'events', component: EventComponent},
   {path: 'typeEvent', component: TypeEventComponent},
   {path: 'services', component: ServiceComponent},
+  {path: 'rooms', component: RoomComponent},
   
 ];
 

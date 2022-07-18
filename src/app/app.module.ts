@@ -16,6 +16,7 @@ import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 import {ServiceComponent} from './components/services/service.component';
 import { HotelPipe } from './pipes/hotel.pipe';
+import {RoomComponent} from './components/rooms/room.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HotelPipe } from './pipes/hotel.pipe';
     TypeEventComponent,
     ServiceComponent,
     HotelPipe,
+    RoomComponent,
     
     
   ],

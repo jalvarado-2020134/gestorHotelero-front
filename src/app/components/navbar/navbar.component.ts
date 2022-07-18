@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     Swal.fire({
       icon: 'success',
-      title: 'Bye,' + '  ' + 'Good Luck'
+      title: 'Bye,' + '  ' + 'Good Luck' 
     })
     this.router.navigateByUrl('/login');
   }

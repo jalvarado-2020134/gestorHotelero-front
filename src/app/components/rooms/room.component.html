@@ -1,23 +1,182 @@
 <app-navbar></app-navbar>
 
-<div class="text-center mt-2 mb-2">
-    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newRoom">
+<img src="../../../assets/rooms-icon-8-removebg-preview.png" height="150" alt="">
+
+<div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newRoom"
+        style="margin-top: -10%;">
         <span class="icon">
-        <i class="fa-solid fa-bed" aria-hidden="true"></i>
-    </span>
+            <i class="fa-solid fa-bed"></i>
+        </span>
+        <span class="text"> Save Room</span>
     </button>
 </div>
+<hr style="margin-top: -2%;">
 
-<hr>
+<table class="container">
+    <thead>
+        <tr>
+            <th>
+                <h1>Name</h1>
+            </th>
+            <th>
+                <h1>Description</h1>
+            </th>
+            <th>
+                <h1>Price</h1>
+            </th>
+            <th>
+                <h1>Available</h1>
+            </th>
+            <th>
+                <h1>Date available</h1>
+            </th>
+            <th>
+                <h1>Hotel</h1>
+            </th>
+            <th>
+                <h1>Actions</h1>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let room of rooms">
+            <td> {{ room.name }} </td>
+            <td> {{ room.description }} </td>
+            <td>Q.{{ room.price }} </td>
+            <td class="bg-success" *ngIf="room.available == true">{{room.available}}</td>
+            <td class="bg-danger" *ngIf="room.available == false">{{room.available}}</td>
+            <td> {{ room.dateAvailable }} </td>
+            <td> {{ room.hotel.name }} </td>
+            <td>
+                <button (click)="getRoom(room._id)" class="btn btn-outline-warning m-2" data-bs-toggle="modal"
+                    data-bs-target="#updateRoom">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bookmark-check" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        <path
+                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                    </svg>
+                    Update
+                </button>
+                <button (click)="deleteRoom(room._id)" class="btn btn-outline-danger ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd"
+                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                    Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-<div class="row background">
-    <div *ngFor="let room of rooms" class="card m-4 text-center" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{room.name}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Description:  {{room.description}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Q.  {{room.price}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Description:  {{room.description}}</h6>
 
+<div class="modal fade" id="newRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i>
+                    &nbsp; Save Room</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #newRoomForm="ngForm">
+                    <div class="mb-3">
+                        <label for="nameTeam" class="form-label">Name</label>
+                        <input [(ngModel)]="room.name" name="name" type="text" class="form-control" id="nameTeam"
+                            aria-describedby="DateEventHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nameTeam" class="form-label">Description</label>
+                        <input [(ngModel)]="room.description" name="name" type="text" class="form-control"
+                            id="nameTeam1" aria-describedby="DateEventHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nameTeam" class="form-label">Price</label>
+                        <input [(ngModel)]="room.price" name="name" type="number" class="form-control" id="nameTeam2"
+                            aria-describedby="DateEventHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nameTeam" class="form-label">Date Available</label>
+                        <input [(ngModel)]="room.dateAvailable" name="name" type="date" class="form-control"
+                            id="nameTeam3" aria-describedby="DateEventHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hotel</label>
+                        <select [(ngModel)]="room.hotel" name="role" class="form-select"
+                            aria-label="Defaul select example">
+                            <option disabled value="" selected>Choose a Hotel</option>
+                            <option *ngFor="let hotel of hotels" value="{{hotel._id}}">
+                                {{hotel.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class=" modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                <button (click)="newRoom(newRoomForm)" type="submit" class="btn btn-success" data-bs-dismiss="modal"><i
+                        class="fa fa-floppy-o" aria-hidden="true"></i> Save Room
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateRoom" tabindex="-1" aria-labelledby="updateRoom" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #5DADE2;">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-pencil" aria-hidden="true"> Update
+                        Room</i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="updateRoom()" *ngIf="roomUpdate">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="roomUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="roomUpdate.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input [(ngModel)]="roomUpdate.price" name="price" type="text" class="form-control">
+                    </div>
+                    <label class="form-label">Available</label>
+                    <select [(ngModel)]="roomUpdate.available" name="available" class="form-select">
+                        <option selected>Open this select menu</option>
+                        <option value="true">AVAILABLE</option>
+                        <option value="false">NO AVAILABLE</option>
+                    </select>
+                    <div class="mb-3">
+                        <label class="form-label">Date Available</label>
+                        <input [(ngModel)]="roomUpdate.dateAvailable" name="dateAvailable" type="date"
+                            class="form-control">
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
+                        </button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            Update Room
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

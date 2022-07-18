@@ -11,6 +11,8 @@
         <a class="nav-link active" routerLink="/hotels" aria-current="page" *ngIf="token">Hotels</a>
         <a *ngIf="token && identity.role === 'ADMIN' || identity.role === 'CLIENT'"   class="nav-link active" routerLink="/events" aria-current="page">Events</a>
         <a *ngIf="token && identity.role === 'ADMIN' || identity.role === 'CLIENT'" class="nav-link active" routerLink="/services" aria-current="page" >Services</a>
+        <a *ngIf="token && identity.role === 'ADMIN' || identity.role === 'CLIENT'" class="nav-link active" routerLink="/rooms" aria-current="page" >Rooms</a>
+
         <a   class="nav-link active" routerLink="/profile" aria-current="page" *ngIf="token">My Profile</a>
 
 
