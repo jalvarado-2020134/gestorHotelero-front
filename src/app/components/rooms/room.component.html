@@ -1,15 +1,27 @@
 <app-navbar></app-navbar>
 
-<img src="../../../assets/rooms-icon-8-removebg-preview.png" height="150" alt="">
+<div *ngIf="token && identity.role === 'MANAGER'" class="text-left mt-2 mb-2">
+    <button routerLink="/hotels" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+        </span>
+        <span class="text">Back To Hotels</span>
+</button>
+</div>
+<img *ngIf="token && identity.role === 'CLIENT'" src="../../../assets/rooms-icon-8-removebg-preview.png" height="150" alt="">
+<div *ngIf="token && identity.role === 'MANAGER' || identity.role === 'CLIENT'" class="form-input mt-5">
+    <input [(ngModel)]="hotel" placeholder="Search Rooms by your Hotel" >
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
 
 <div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
-    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newRoom"
-        style="margin-top: -10%;">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newRoom">
         <span class="icon">
-            <i class="fa-solid fa-bed"></i>
+            <i class="fa fa-bed" aria-hidden="false"></i>
         </span>
-        <span class="text"> Save Room</span>
-    </button>
+        <span class="text">   Save  Room</span>
+    </button><br><br><br><br>
 </div>
 <hr style="margin-top: -2%;">
 
@@ -34,22 +46,24 @@
             <th>
                 <h1>Hotel</h1>
             </th>
-            <th>
+            <th *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'">
                 <h1>Actions</h1>
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let room of rooms">
+        <tr *ngFor="let room of rooms | hotel:hotel">
             <td> {{ room.name }} </td>
             <td> {{ room.description }} </td>
             <td>Q.{{ room.price }} </td>
-            <td class="bg-success" *ngIf="room.available == true">{{room.available}}</td>
-            <td class="bg-danger" *ngIf="room.available == false">{{room.available}}</td>
+            <td class="bg-success text-center" *ngIf="room.available == true">Available</td>
+            <td class="bg-danger text-center" *ngIf="room.available == false">No Available</td>
             <td> {{ room.dateAvailable }} </td>
             <td> {{ room.hotel.name }} </td>
+            
             <td>
-                <button (click)="getRoom(room._id)" class="btn btn-outline-warning m-2" data-bs-toggle="modal"
+
+                <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="getRoom(room._id)" class="btn btn-outline-warning m-2" data-bs-toggle="modal"
                     data-bs-target="#updateRoom">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-bookmark-check" viewBox="0 0 16 16">
@@ -60,7 +74,7 @@
                     </svg>
                     Update
                 </button>
-                <button (click)="deleteRoom(room._id)" class="btn btn-outline-danger ">
+                <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="deleteRoom(room._id)" class="btn btn-outline-danger ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-trash" viewBox="0 0 16 16">
                         <path

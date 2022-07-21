@@ -17,6 +17,9 @@ import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 import {ServiceComponent} from './components/services/service.component';
 import { HotelPipe } from './pipes/hotel.pipe';
 import {RoomComponent} from './components/rooms/room.component';
+import { ReservationManagerComponent } from './components/reservations/reservation-manager/reservation-manager.component';
+import {ReservationUserComponent} from './components/reservations/reservation-client/reservation-client.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import {RoomComponent} from './components/rooms/room.component';
     ServiceComponent,
     HotelPipe,
     RoomComponent,
-    
+    ReservationManagerComponent,
+    ReservationUserComponent,
     
   ],
   imports: [

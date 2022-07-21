@@ -1,4 +1,6 @@
 <app-navbar></app-navbar>
+
+
 <div class="text-left">
     <div class="input-group m-5">
         <input [(ngModel)]="search" type="text" class="form-control" placeholder="Find Hotel by Name"
@@ -15,6 +17,14 @@
                 <i class="fa-solid fa-hotel"></i>
             </span>
             <span class="text"> New Hotel</span>
+        </button>
+    </div>
+    <div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
+        <button routerLink="/reservationManager" class="btn btn-warning btn-icon-split" data-bs-toggle="modal">
+            <span class="icon">
+                <i class="fa-solid fa-hotel"></i>
+            </span>
+            <span class="text">Make Report of Reservations</span>
         </button>
     </div>
 
@@ -40,9 +50,12 @@
             <div class="card-body">
                 <h5 class="card-title">Address: {{hotel.address}}</h5>
                 <h5 class="card-title">Phone: {{hotel.phone}}</h5>
+                <h5 class="card-title">Times Request:  {{hotel.timesRequest}}</h5>
                 <p class="card-subtutle">Manager: {{hotel.manager.name}}</p>
-                <div *ngIf="token && identity.role === 'CLIENT'"> <button routerLink="/reservation"
+                <div *ngIf="token && identity.role === 'CLIENT'" > <button [routerLink]="['/reservationUser/' + hotel._id]"
                         class="btn btn-success">Make Reservation</button></div>
+                        <div  > <button [routerLink]="['/reservationUser/' + hotel._id]"
+                            class="btn btn-success">Check Reservations</button></div>
                 <div *ngIf="token && identity.role === 'ADMIN'">
                     <button (click)="getHotel(hotel._id)" class="btn btn-warning m-2" data-bs-toggle="modal"
                         data-bs-target="#updateHotel" class="btn btn-warning m-2">

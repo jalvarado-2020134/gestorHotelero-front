@@ -1,0 +1,163 @@
+<app-navbar></app-navbar>
+
+<div class=" text-center m-4">
+    <button type="button" data-bs-toggle="offcanvas" href="#updateTask" aria-controls="updateTask" class="btn btn-dark">
+      <svg class="text-center" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-calendar-check" viewBox="0 0 16 16">
+        <path
+          d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+        <path
+          d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+      </svg>
+      Reservation</button>
+  </div>
+
+<div class="modal fade" tabindex="-1" id="exampleModal2" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rooms</h5>
+
+            </div>
+            <div class="modal-body">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Room</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let room of roomGetId; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <th>{{room.name}}</th>
+                            <th>{{room.description}}</th>
+                            <td class="bg-success text-center" *ngIf="room.available == true">Available</td>
+                            <td class="bg-danger text-center" *ngIf="room.available == false">No Available</td>
+                            <td>Q.{{room.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="updateTask" aria-labelledby="offcanvasUpdateLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasUpdateLabel">Make a Reservation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form #newReservationForm="ngForm">
+            <label class="form-label">Room | State | Price</label>
+            <select [(ngModel)]="reservation.room" name="room" class="form-select" aria-label="update">
+                <option disabled value="" selected>Choose a Room</option>
+                <option *ngFor="let room of roomGetId" value="{{room._id}}">{{room.name}} | {{room.available}} |
+                    Q.{{room.price}}</option>
+            </select>
+            <div class="mb-3">
+                <label for="titleInputUpdate" class="form-label">¿What Day do you Reserve?</label>
+                <input [(ngModel)]="reservation.startDate" name="startDate" type="date" class="form-control"
+                    id="titleInputUpdate">
+            </div>
+            <div class="mb-3">
+                <label for="titleInputUpdate" class="form-label">¿What Day do leave the hotel?</label>
+                <input [(ngModel)]="reservation.endDate" name="endDate" type="date" class="form-control"
+                    id="titleInputUpdate">
+            </div>
+            <br>
+            <hr>
+            <div class="text-center">
+                <button type="button" class="me-2 btn btn-secondary" data-bs-dismiss="offcanvas">Close</button>
+                <button type="button" (click)="makeReservation(newReservationForm)" class="btn btn-success"
+                    data-bs-dismiss="offcanvas">Save the reservation</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center m-5">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Total</th>
+                <th scope="col">Room</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let reservation of reservations; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{reservation.startDate}}</td>
+                <td>{{reservation.endDate}}</td>
+                <td>{{reservation.totalPrice}}</td>
+                <td>{{reservation.room.name}}</td>
+                <td>
+                <button class=" btn btn-outline-danger m-2" (click)="cancelReservation(reservation._id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd"
+                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                </button>
+
+                <button (click)="getReservation(reservation._id)" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalReservation" class=" btn btn-outline-primary ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                        <path
+                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                    </svg>
+                </button>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" tabindex="-1" id="exampleModalReservation" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reservations</h5>
+            </div>
+            <div class="modal-body" *ngIf="reservationGetId">
+                <div class="row">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>¿Who make the reservation?</h5>
+                                <h6 class="card-title">Name: {{reservationGetId.user.name}} {{reservationGetId.user.surname}}</h6>
+
+                                <td class="text-success text-center" *ngIf="reservationGetId.state == 'In Progress'">In Progress</td><br>
+                                <td class="text-danger text-center" *ngIf="reservationGetId.state == 'Cancelled'">Cancelled</td><br>
+                                <h6 class="card-subtitle">Start Date:   {{reservationGetId.startDate}}</h6><br>
+                                <h6 class="card-subtitle">End Date:   {{reservationGetId.endDate}}</h6><br>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

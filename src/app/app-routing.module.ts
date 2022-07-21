@@ -10,6 +10,9 @@ import {EventComponent} from './components/events/event.component';
 import {TypeEventComponent} from './components/typeEvent/typeEvent.component';
 import {ServiceComponent} from './components/services/service.component';
 import {RoomComponent} from './components/rooms/room.component';
+import {ReservationManagerComponent} from './components/reservations/reservation-manager/reservation-manager.component';
+import {ReservationUserComponent} from './components/reservations/reservation-client/reservation-client.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +25,8 @@ const routes: Routes = [
   {path: 'typeEvent', component: TypeEventComponent},
   {path: 'services', component: ServiceComponent},
   {path: 'rooms', component: RoomComponent},
+  {path: 'reservationManager', component: ReservationManagerComponent},
+  {path: 'reservationUser/:idHotel', component: ReservationUserComponent},
   
 ];
 

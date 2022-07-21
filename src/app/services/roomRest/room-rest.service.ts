@@ -37,4 +37,12 @@ export class RoomRestService{
     deleteRoom(id:string){
         return this.http.delete(environment.baseUrl + 'room/deleteRoom/' + id,{headers: this.httpOptions})
     }
+
+    getRoomsByHotel(id:any){
+        return this.http.get(environment.baseUrl + 'room/roomByHotel/' + id,{headers:this.httpOptions});
+    }
+
+    getRoomsAvailable(idHotel: any){
+        return this.http.get(environment.baseUrl + 'room/roomAvailable/' + idHotel,{headers: this.httpOptions});
+    }
 }

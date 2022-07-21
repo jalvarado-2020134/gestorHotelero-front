@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div *ngIf="token && identity.role === 'ADMIN'" class="text-left mt-2 mb-2" style="margin-left: 2%;">
+    <button routerLink="/hotels" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+        </span>
+        <span class="text">Back To Hotels</span>
+</button>
+</div>
+
+<div class="text-center m-4">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hotel</th>
+                <th scope="col">Address</th>
+                <th scope="col">
+                    Actions
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-info-circle-fill ms-2" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                    </svg>
+                </th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr *ngFor="let hotel of hotels; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{hotel.name}}</td>
+                    <td>{{hotel.address}}</td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-icon-split" (click)="getReservations(hotel._id)">
+                            <svg  data-bs-toggle="modal" data-bs-target="#exampleModal" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                        <path
+                            d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                    </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Report Reservations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center m-4">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">State</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Room</th>
+                                <th scope="col">Hotel</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reservation of reservations; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td class="bg-success text-center" *ngIf="reservation.state == 'In Progress'">In Progress</td>
+                                <td class="bg-danger text-center" *ngIf="reservation.state == 'Cancelled'">Cancelled</td>
+                                <td>{{reservation.startDate}}</td>
+                                <td>{{reservation.endDate}}</td>
+                                <td>{{reservation.room.name}}</td>
+                                <td>{{reservation.hotel.name}}</td>
+                                <td>Q.{{reservation.totalPrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print Report</a>            </div>
+        </div>
+    </div>
+</div>
