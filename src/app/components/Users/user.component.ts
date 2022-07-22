@@ -16,6 +16,7 @@ export class UserComponent implements OnInit{
     userId: any;
     userUpdate_Admin: any;
     delete_Admin: any;
+    usersManagers: any;
     constructor(private userRest: UserAdminRestService,
         ){
             this.user = new UserAdminModel('','','','','','','');
@@ -32,6 +33,14 @@ export class UserComponent implements OnInit{
                     console.log(this.users);
                 },
                 error: (err)=> console.log(err)
+            })
+        }
+
+        getManagers(){
+            this.userRest.getManagers().subscribe({
+                next:(res:any)=>{
+                    this.usersManagers = res.usersExist
+                }
             })
         }
 

@@ -37,4 +37,8 @@ export class ServiceRestService{
     deleteService(id:string){
         return this.http.delete(environment.baseUrl + 'service/deleteService/' + id,{headers:this.httpOptions});
     }
+
+    getServicesByHotel(id:string){
+        return this.http.get(environment.baseUrl + 'service/getServicesByHotel/' + id,{headers:this.httpOptions});
+    }
 }

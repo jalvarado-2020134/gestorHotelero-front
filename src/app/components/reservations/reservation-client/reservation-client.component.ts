@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { HotelRestService } from "src/app/services/hotelRest/hotel-res.service";
 import { ReservationRestService } from "src/app/services/reservationRest/reservation-rest.service";
 import { Router } from "@angular/router";
+import {BillModel} from 'src/app/models/bill.model'
 import { ReservationModel } from "src/app/models/reservation.model";
 import Swal from "sweetalert2";
 import { ServiceRestService } from "src/app/services/serviceRest/service-rest.service";
@@ -21,6 +22,8 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
     idReservation: any;
     reservationGetId: any;
     idHotel: any;
+    billId: any;
+    bill: BillModel;
     rooms: any;
     services: any;
     newPrices: any;
@@ -32,7 +35,8 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
         private activateRoute: ActivatedRoute,
         private router: Router
     ){
-        this.reservation = new ReservationModel('','',0,'','',);
+        this.reservation = new ReservationModel('','',0,'','','');
+        this.bill = new BillModel('','','','','','','');
     }
 
     ngOnInit(): void {
@@ -42,8 +46,15 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
 
         this.getRoomsAvailable();
         this.getRoomByHotel();
-        this.getServices();
+        this.getServicesByHotel();
         this.myReservations();
+    }
+
+    getServicesByHotel(){
+        this.serviceRest.getServicesByHotel(this.idHotel).subscribe({
+            next:(res:any)=> this.services = res.services,
+            error:(err)=> console.log(err)
+        })
     }
 
     getServices(){
@@ -128,13 +139,36 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
         })
     }
 
+    createBill(newBillForm:any){
+        this.reservationRest.createBill(this.reservationGetId._id, this.bill).subscribe({
+            next:(res:any)=>{
+                Swal.fire({
+                    title: res.message,
+                    icon: 'success'
+                });
+                this.myReservations();
+                newBillForm.reset();
+                this.router.navigate(['/bill' + this.reservationGetId._id]);
+            },
+
+            error:(err:any)=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: err.error.message || err.error
+                });
+                newBillForm.reset()
+            }
+        })
+    }
+
     cancelReservation(idReservation:string){
         this.reservationRest.cancelReservation(this.idHotel, idReservation).subscribe({
             next: (res:any)=>{
                 console.log(this.reservationGetId._id),
                 Swal.fire({
+                    icon: 'success',
                     title: res.message,
-                    icon: 'success'
+
                 });
                 this.myReservations();
             },

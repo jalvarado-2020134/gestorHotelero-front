@@ -21,6 +21,7 @@ export class ServiceComponent implements OnInit{
     updateService: any;
     newPrices:any;
     newPrice:any;
+    idHotel: any;
     
     constructor(
         private hotelRest: HotelRestService,
@@ -37,6 +38,13 @@ export class ServiceComponent implements OnInit{
         this.token = this.userRest.getToken();
         this.identity = this.userRest.getIdentity();
         this.role = this.userRest.getIdentity().role;
+    }
+
+    getServicesByHotel(){
+        this.serviceRest.getServicesByHotel(this.idHotel).subscribe({
+            next:(res:any)=> this.services = res.services,
+            error:(err)=> console.log(err)
+        })
     }
 
     getServices(){

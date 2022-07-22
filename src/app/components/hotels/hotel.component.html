@@ -54,7 +54,7 @@
                 <p class="card-subtutle">Manager: {{hotel.manager.name}}</p>
                 <div *ngIf="token && identity.role === 'CLIENT'" > <button [routerLink]="['/reservationUser/' + hotel._id]"
                         class="btn btn-success">Make Reservation</button></div>
-                        <div  > <button [routerLink]="['/reservationUser/' + hotel._id]"
+                        <div *ngIf="token && identity.role === 'MANAGER'"> <button [routerLink]="['/reservationUser/' + hotel._id]"
                             class="btn btn-success">Check Reservations</button></div>
                 <div *ngIf="token && identity.role === 'ADMIN'">
                     <button (click)="getHotel(hotel._id)" class="btn btn-warning m-2" data-bs-toggle="modal"
@@ -98,7 +98,7 @@
                             <select [(ngModel)]="hotel.manager" name="role" class="form-select"
                                 aria-label="Defaul select example">
                                 <option disabled value="" selected>Choose a Manager</option>
-                                <option *ngFor="let user of users" value="{{user._id}}">
+                                <option *ngFor="let user of usersManager" value="{{user._id}}">
                                     {{user.name}}
                                 </option>
                             </select>
@@ -146,7 +146,7 @@
                         <select [(ngModel)]="hotelUpdate.manager" name="role" class="form-select"
                             aria-label="Default select example">
                             <option disabled value="">Update Manager</option>
-                            <option *ngFor="let user of users" value="{{user._id}}">{{user.name}}</option>
+                            <option *ngFor="let user of usersManager" value="{{user._id}}">{{user.name}}</option>
                         </select>
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">

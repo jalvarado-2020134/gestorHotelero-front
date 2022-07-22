@@ -12,7 +12,7 @@ import {ServiceComponent} from './components/services/service.component';
 import {RoomComponent} from './components/rooms/room.component';
 import {ReservationManagerComponent} from './components/reservations/reservation-manager/reservation-manager.component';
 import {ReservationUserComponent} from './components/reservations/reservation-client/reservation-client.component';
-
+import {BillComponent} from './components/bill/bill.component'
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'rooms', component: RoomComponent},
   {path: 'reservationManager', component: ReservationManagerComponent},
   {path: 'reservationUser/:idHotel', component: ReservationUserComponent},
+  {path: 'bill/:idReservation', component: BillComponent},
   
 ];
 

@@ -20,6 +20,8 @@ export class HotelComponent implements OnInit{
     search: string = '';
     users: any;
     hotelUpdate: any;
+    usersManager: any;
+
 
 
     constructor(
@@ -35,6 +37,7 @@ export class HotelComponent implements OnInit{
     ngOnInit(): void {
         this.getHotels();
         this.getUsers();
+        this.getManagers();
         this.token = this.usersRest.getToken();
         this.identity = this.usersRest.getIdentity();
         this.role = this.usersRest.getIdentity().role;
@@ -48,6 +51,14 @@ export class HotelComponent implements OnInit{
                 console.log(res.hotels);
             },
             error: (err)=> console.log(err)
+        })
+    }
+
+    getManagers(){
+        this.userRest.getManagers().subscribe({
+            next:(res:any)=>{
+                this.usersManager = res.usersExist
+            }
         })
     }
 

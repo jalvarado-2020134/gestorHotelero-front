@@ -53,4 +53,12 @@ export class ReservationRestService{
     cancelReservation(idHotel: string, idReservation: string){
         return this.http.delete(environment.baseUrl + 'reservation/deleteReservation/' + idHotel + '/' + idReservation,{headers: this.httpOptions})
     }
+
+    createBill(id: string, params:{}){
+        return this.http.post(environment.baseUrl + 'bill/createBill/' + id,params,{headers: this.httpOptions});
+    }
+
+    getBill(idReservation: string){
+        return this.http.get(environment.baseUrl + 'bill/getBill/' + idReservation,{headers: this.httpOptions})
+    }
 }

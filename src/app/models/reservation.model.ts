@@ -5,5 +5,6 @@ export class ReservationModel{
         public totalPrice: Number,
         public user: String,
         public room: String,
+        public service: string,
     ){}
 }
