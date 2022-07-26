@@ -17,6 +17,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Hotel</th>
                 <th scope="col">Address</th>
+                <th scope="col">Manager</th>
                 <th scope="col">
                     Actions
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -32,6 +33,7 @@
                     <th scope="row">{{i+1}}</th>
                     <td>{{hotel.name}}</td>
                     <td>{{hotel.address}}</td>
+                    <td>{{hotel.manager.name}}</td>
                     <td>
                         <button class="btn btn-outline-primary btn-icon-split" (click)="getReservations(hotel._id)">
                             <svg  data-bs-toggle="modal" data-bs-target="#exampleModal" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text"
@@ -52,7 +54,8 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Report Reservations</h5>
+                <h5  *ngIf="token && identity.role === 'ADMIN'" class="modal-title" id="exampleModalLabel">Report Reservations</h5>
+                <h5  *ngIf="token && identity.role === 'MANAGER'" class="modal-title" id="exampleModalLabel">Check the Reservation in your Hotel</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -87,7 +90,7 @@
             </div>
             <div class="mt-5 modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print Report</a>            </div>
+                <a  *ngIf="token && identity.role === 'ADMIN'"  href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print Report</a>            </div>
         </div>
     </div>
 </div>

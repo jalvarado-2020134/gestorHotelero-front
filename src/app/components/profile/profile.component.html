@@ -54,6 +54,9 @@
             class="fa fa-file-image-o" aria-hidden="true"></i>
           Upload Image
         </button>
+        <button (click)="getHistory()" class="btn btn-info mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <i class="fa fa-building" aria-hidden="true"></i> My History
+        </button>
       </div>
     </form>
   </div>
@@ -152,3 +155,36 @@
     </div>
   </div>
 </body>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboards="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">My History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Hotel</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let hotel of hotels">
+            <tr>
+              <td>{{hotel.name}}</td>
+              <td>{{hotel.address}}</td>
+              <td>{{hotel.phone}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

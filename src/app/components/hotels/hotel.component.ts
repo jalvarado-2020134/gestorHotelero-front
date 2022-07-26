@@ -54,6 +54,14 @@ export class HotelComponent implements OnInit{
         })
     }
 
+    getHotelsMost(){
+        this.hotels =[];
+        this.hotelRest.getHotelsMost().subscribe({
+            next:(res:any)=> this.hotels = res.hotels,
+            error:(err)=> console.log(err)
+        })
+    }
+
     getManagers(){
         this.userRest.getManagers().subscribe({
             next:(res:any)=>{

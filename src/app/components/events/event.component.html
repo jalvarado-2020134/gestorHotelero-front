@@ -19,7 +19,7 @@
     <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
 </div>
 <br>
-<div class="text-center mt-2 mb-2">
+<div *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
     <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newEvent">
         <span class="icon">
             <i class="fas fa-champagne-glasses"></i>
@@ -37,8 +37,8 @@
             <h6 class="card-subtitle mb-2 text-muted">Date:  {{event.date}}</h6>
             <h5 class="card-text text-muted">Type Event:  {{event.typeEvent.name}}</h5>
             <h6 class="card-text">Hotel:  {{event.hotel.name}}</h6>
-            <button (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
-            <button (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+            <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="getEvent(event._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent" class="btn btn-warning m-2"><i class="fa fa-pencil" aria-hidden="true"></i> Update</button>
+            <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="deleteEvent(event._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </div>
     </div>
 </div>

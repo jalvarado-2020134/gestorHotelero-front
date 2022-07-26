@@ -27,6 +27,8 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
     rooms: any;
     services: any;
     newPrices: any;
+    newStartDate:any;
+    endDate:any;
     
     constructor(
         private serviceRest: ServiceRestService,
@@ -105,6 +107,7 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
     
 
     makeReservation(newReservationForm: any){
+        console.log(this.reservation.startDate);
         this.reservationRest.makeReservation(this.idHotel, this.reservation).subscribe({
             next: (res:any)=>{
                 Swal.fire({
@@ -128,8 +131,13 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
 
     getReservation(id: string){
         this.reservationRest.getReservation(this.idHotel, id).subscribe({
-            next:(res:any)=> this.reservationGetId = res.reservation,
-
+            next:(res:any)=> {
+            this.reservationGetId = res.reservation;
+            let date1 = this.reservation.startDate.split("T")
+            this.newStartDate = date1[0]
+            let date2 = this.reservation.endDate.split("T")
+            this.endDate = date2[0]
+            },
             error:(err)=>{
                 Swal.fire({
                     icon: 'error',

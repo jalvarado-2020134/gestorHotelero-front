@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserModel } from "src/app/models/user.model";
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
+import { HotelRestService } from "src/app/services/hotelRest/hotel-res.service";
 import { UploadImageService } from 'src/app/services/uploadImage/upload-image.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -17,10 +18,12 @@ export class ProfileComponent implements OnInit {
   public ProfileModel: UserModel;
   public filesToUpload: any;
   public url: any;
+  hotels: any;
 
   constructor(
     public UserRest: UserRestService,
     private router: Router,
+    private hotelRest: HotelRestService,
     private uploadImageRest: UploadImageService) {
     this.ProfileModel = new UserModel('', '', '', '', '', '', '');
     this.url = environment.baseUrl;
@@ -81,6 +84,13 @@ export class ProfileComponent implements OnInit {
   filesChange(inputFile:any){
     this.filesToUpload = <Array<File>>inputFile.target.files;
     console.log(this.filesToUpload);
+  }
+
+  getHistory(){
+    this.hotelRest.getHistory().subscribe({
+      next:(res:any)=> this.hotels = res.hotels,
+      error: (err)=> console.log(err)
+    })
   }
 
   uploadImage(){

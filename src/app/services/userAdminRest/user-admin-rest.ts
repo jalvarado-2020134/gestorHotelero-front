@@ -27,7 +27,7 @@ export class UserAdminRestService{
     }
 
     getUsers(){
-        return this.http.get(environment.baseUrl + 'user/getUsers', {headers: this.httpOptions});
+        return this.http.get(environment.baseUrl + 'user/getUsers', {headers:this.httpOptions.set('Authorization',this.getToken())});
     }
 
     newUser(params:{}){
@@ -40,5 +40,17 @@ export class UserAdminRestService{
 
     userDeleted(id:string){
         return this.http.delete(environment.baseUrl + 'user/delete_Admin/' + id,{headers: this.httpOptions})
+    }
+
+    getToken(){
+        let globalToken = localStorage.getItem('token');
+        let token;
+        if(globalToken != undefined){
+
+            token = globalToken;
+        }else{
+            token = '';
+        }
+        return token;
     }
 }

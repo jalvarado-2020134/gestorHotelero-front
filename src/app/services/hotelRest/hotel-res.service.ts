@@ -11,7 +11,7 @@ import { UserRestService } from "../userRest/user-rest.service";
 export class HotelRestService{
     httpOptions = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.userRest.getToken(),
+        'Authorization': this.userRest.getToken()
     });
 
     constructor(
@@ -27,6 +27,19 @@ export class HotelRestService{
         return this.http.get(environment.baseUrl + 'hotel/getHotel/' + id,{headers: this.httpOptions});
     }
 
+    getHotelsMost(){
+        return this.http.get(environment.baseUrl + 'hotel/getByMostRequested',{headers:this.httpOptions});
+    }
+
+    getHistory(){
+        return this.http.get(environment.baseUrl + 'hotel/getHistory',{
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization: this.getToken(),
+            },
+        });
+    }
+
     newHotel(params:{}){
         return this.http.post(environment.baseUrl + 'hotel/newHotel', params,{headers: this.httpOptions});
     }
@@ -37,5 +50,17 @@ export class HotelRestService{
 
     deleteHotel(id:string){
         return this.http.delete(environment.baseUrl + 'hotel/deleteHotel/' + id,{headers: this.httpOptions});
+    }
+
+    getToken(){
+        let globalToken = localStorage.getItem('token');
+        let token;
+        if(globalToken != undefined){
+            token = globalToken;
+        }else{
+            token = '';
+        }
+
+        return token;
     }
 }

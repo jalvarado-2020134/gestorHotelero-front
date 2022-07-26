@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 
-<div class="text-left">
+<div *ngIf="token && identity.role === 'MANAGER' || identity.role === 'CLIENT'" class="text-left">
     <div class="input-group m-5">
         <input [(ngModel)]="search" type="text" class="form-control" placeholder="Find Hotel by Name"
             aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -9,8 +9,31 @@
             class="rounded float-end" alt="30%">
     </div>
 </div>
-
-<div>
+<br>
+<div *ngIf="token && identity.role === 'ADMIN'" class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+      <div class="col-md-8">
+        <div class="search">
+          <input  [(ngModel)]="search" name="provider" type="text" class="form-control" placeholder="Search hotels">
+  
+          <label class="custom-radio-checkbox m-3">
+            <input class="custom-radio-checkbox__input" type="radio" name="genero" value="stockAsc" checked  >
+            <span class="custom-radio-checkbox__text">Name</span>
+          </label>
+          
+  
+  
+          <label class="custom-radio-checkbox m-3">
+            <input class="custom-radio-checkbox__input" type="radio" name="genero" value="stockAsc" checked 
+             data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="getHotelsMost()"  >
+            <span class="custom-radio-checkbox__text">More Request</span>
+          </label>
+   
+        </div>   
+      </div>
+    </div>
+  </div>
+  
     <div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
         <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newHotel">
             <span class="icon">
@@ -42,6 +65,15 @@
             Rooms
         </button>
     </div>
+    <div *ngIf="token && identity.role === 'MANAGER'" class="text-center mt-2 mb-2">
+        <button routerLink="/reservationManager" class="btn btn-warning btn-icon-split" data-bs-toggle="modal">
+            <span class="icon">
+                <i class="fa-solid fa-hotel"></i>
+            </span>
+            <span class="text">Check Reservations</span>
+        </button>
+    </div>
+    
     <div class="wrapper" *ngIf="hotels">
         <div class="card text-dark mb-3" style="background-color: #AED6F1;"
             *ngFor="let hotel of hotels | search:search">
@@ -54,8 +86,7 @@
                 <p class="card-subtutle">Manager: {{hotel.manager.name}}</p>
                 <div *ngIf="token && identity.role === 'CLIENT'" > <button [routerLink]="['/reservationUser/' + hotel._id]"
                         class="btn btn-success">Make Reservation</button></div>
-                        <div *ngIf="token && identity.role === 'MANAGER'"> <button [routerLink]="['/reservationUser/' + hotel._id]"
-                            class="btn btn-success">Check Reservations</button></div>
+                        
                 <div *ngIf="token && identity.role === 'ADMIN'">
                     <button (click)="getHotel(hotel._id)" class="btn btn-warning m-2" data-bs-toggle="modal"
                         data-bs-target="#updateHotel" class="btn btn-warning m-2">

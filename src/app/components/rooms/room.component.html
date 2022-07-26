@@ -15,7 +15,7 @@
 </div>
 <br>
 
-<div *ngIf="token && identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
+<div *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" class="text-center mt-2 mb-2">
     <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#newRoom">
         <span class="icon">
             <i class="fa fa-bed" aria-hidden="false"></i>

@@ -16,6 +16,8 @@ export class BillComponent implements OnInit{
     idReservation: any;
     billId: any;
     reservation: any;
+    newStartDate:any;
+    endDate:any;
 
     constructor(
         private reservationRest: ReservationRestService,
@@ -37,7 +39,12 @@ export class BillComponent implements OnInit{
             next: (res:any)=>{
                 this.billId = res.bill;
                 this.reservation = res.checkReservation;
+                let date1 = this.reservation.startDate.split("T")
+                this.newStartDate = date1[0]
+                let date2 = this.reservation.endDate.split("T")
+                this.endDate = date2[0]
             },
+
             error:(err)=>{
                 Swal.fire({
                     icon: 'warning',
