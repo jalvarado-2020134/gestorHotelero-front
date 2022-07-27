@@ -111,7 +111,7 @@ export class UserComponent implements OnInit{
                         next:(res:any)=>{
                             Swal.fire({
                                 icon: 'success',
-                                title: res.message + '  ' + res.userDeleted.name + ' has been deleted ',
+                                title: res.message + '  "' + res.userDeleted.name + '" ' + ' has been deleted ',
                                 position: 'center',
                                 showConfirmButton: true,
                                 timer: 2000

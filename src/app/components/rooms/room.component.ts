@@ -122,7 +122,7 @@ export class RoomComponent implements OnInit{
                     next:(res:any)=>{
                         Swal.fire({
                             icon: 'success',
-                            title: res.message + '  ' + res.deleteRoom.name + ' has been deleted ',
+                            title: res.message + '  "' + res.deleteRoom.name + '"  ' + ' has been deleted ',
                             position: 'center',
                             showConfirmButton: true,
                             timer: 2000

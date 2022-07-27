@@ -112,7 +112,7 @@ import { ServiceRestService } from "src/app/services/serviceRest/service-rest.se
             next: (res:any)=>{
                 Swal.fire({
                     icon: 'success',
-                    title: res.message
+                    title: res.message 
                 });
                 this.myReservations();
                 newReservationForm.reset();

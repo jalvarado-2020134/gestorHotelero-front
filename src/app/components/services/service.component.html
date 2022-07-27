@@ -53,11 +53,11 @@
           <h5 class="card-title text-center">Description:  {{service.description}}</h5>
           <h5 class="card-title text-center">Q.  {{service.price}}.00</h5>
           <h5 class="card-subtutle text-center text-muted">Hotel: {{service.hotel.name}}</h5>
-           <button (click)="getService(service._id)"  data-bs-toggle="modal" data-bs-target="#serviceUpdate" class="btn btn-warning m-2">
+           <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="getService(service._id)"  data-bs-toggle="modal" data-bs-target="#serviceUpdate" class="btn btn-warning m-2">
           <i class="fa fa-pencil" aria-hidden="true"></i>
             Update
         </button>
-        <button (click)="deleteService(service._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+        <button *ngIf="token && identity.role === 'MANAGER' || identity.role === 'ADMIN'" (click)="deleteService(service._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </div>
       </div>
 </div>

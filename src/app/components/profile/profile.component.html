@@ -42,7 +42,7 @@
 
 
       <div class="mt-5 modal-footer d-flex justify-content-center">
-        <button  type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteHotel">
+        <button (click)="deleteHotel(UserRest.getIdentity()._id)"  type="button" class="btn btn-danger" data-bs-toggle="modal" >
           <i class="fa fa-trash-alt" aria-hidden="true"></i> Delete Account
         </button>
         <button  type="submit" class="btn btn-success" data-bs-toggle="modal"
@@ -54,7 +54,7 @@
             class="fa fa-file-image-o" aria-hidden="true"></i>
           Upload Image
         </button>
-        <button (click)="getHistory()" class="btn btn-info mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button *ngIf="token && identity.role === 'CLIENT'" (click)="getHistory()" class="btn btn-info mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           <i class="fa fa-building" aria-hidden="true"></i> My History
         </button>
       </div>
@@ -125,35 +125,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="deleteHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-            Delete Account:
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input  placeholder="Enter your Password for Delete" name="password" type="password" class="form-control">
-          </div>
-          <div class=" modal-footer justify-content-center">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              <i class="fa fa-times-circle" aria-hidden="true"></i>
-              Cancel</button>
-            <button  (click)="deleteHotel(UserRest.getIdentity()._id)" type="submit" data-bs-dismiss="modal" class="btn btn-danger">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              Delete Account
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 </body>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboards="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

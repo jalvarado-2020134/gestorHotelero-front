@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   public filesToUpload: any;
   public url: any;
   hotels: any;
+  token: any;
+  role: any;
 
   constructor(
     public UserRest: UserRestService,
@@ -28,8 +30,11 @@ export class ProfileComponent implements OnInit {
     this.ProfileModel = new UserModel('', '', '', '', '', '', '');
     this.url = environment.baseUrl;
   }
-  ngOnInit(): void { }
-
+  ngOnInit(): void { 
+  this.token = this.UserRest.getToken();
+  this.identity = this.UserRest.getIdentity();
+  this.role = this.UserRest.getIdentity().role;
+  }
   userUpdate() {
     this.userGetId = this.UserRest.getIdentity();
     this.UserRest.userUpdate(
@@ -63,7 +68,7 @@ export class ProfileComponent implements OnInit {
           next: (res: any) => {
             Swal.fire({
               icon: 'success',
-              title: res.message + '  ' + res.deleteUser.name + ' has been deleted ',
+              title: res.message + '  "' + res.deleteUser.name + '"  ' + ' has been deleted ',
               position: 'center',
               showConfirmButton: true,
               timer: 2000
@@ -101,6 +106,10 @@ export class ProfileComponent implements OnInit {
       if(!res2.error){
         localStorage.setItem('identity', JSON.stringify(res2.updateUser))
         this.userGetId  = this.UserRest.getIdentity();
+        Swal.fire({
+          icon: 'success',
+          title: 'Image added successfully',
+        })
       }else{
         console.log(res2);
 
