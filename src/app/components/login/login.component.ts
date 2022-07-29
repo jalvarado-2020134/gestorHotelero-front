@@ -42,4 +42,18 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  loginGoogle(){
+    this.userRest.loginGoogle().then((res:any)=>{
+      if(res.credential.accessToken){
+        localStorage.setItem('token', res.credential.accessToken);
+        localStorage.setItem('identity', JSON.stringify(res.additionalUserInfo.profile));
+        localStorage.setItem('outService', 'true');
+        this.router.navigateByUrl('')
+      }else{
+        console.log(res);
+      }
+    })
+      
+  }
+
 }

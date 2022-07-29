@@ -1,6 +1,9 @@
 import { Inject, Injectable } from "@angular/core";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from "src/environments/environment";
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import firebase from "firebase/compat/app";
+
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +15,8 @@ export class UserRestService{
     });
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private fireAuth: AngularFireAuth
     ){}
 
     test(message: string){
@@ -58,5 +62,14 @@ export class UserRestService{
     
     deleteHotel(id:string){
       return this.http.delete(environment.baseUrl + 'user/delete/' + id,{headers:this.httpOptions.set('Authorization',this.getToken())});
+    }
+
+    async loginGoogle(){
+        try{
+            return await this.fireAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        }catch(err){
+            console.log(err)
+            return err;
+        }
     }
 }
